@@ -2,7 +2,7 @@
 import React, { useTransition, useState } from "react";
 import TabButton from "./TabButton";
 import Image from 'next/image'
-import AboutImg from "../../../public/assets/circle2.png";
+import AboutImg from "../../../public/images/circle2.png";
 
 const TAB_DATA = [
   {
