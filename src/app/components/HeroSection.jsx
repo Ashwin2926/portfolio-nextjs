@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import hero from '../../assets/hero.jpg'
+
 
 const HeroSection = () => {
   return (
@@ -66,8 +65,8 @@ const HeroSection = () => {
           className="col-span-4 place-self-center mt-4 lg:mt-0"
         >
           <div className=" w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] relative image shape">
-            <Image
-              src={hero}
+            <img
+              src={"./images/hero.jpg"}
               alt="hero image"
               className="absolute transform  image-shape "
               width={300}
