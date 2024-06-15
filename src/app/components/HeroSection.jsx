@@ -4,7 +4,7 @@ import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import hero from '../../assets/hero.jpg'
+import hero from '../../assets/hero.JPG'
 
 const HeroSection = () => {
   return (
