@@ -568,18 +568,14 @@ video {
   .container {
     max-width: 640px;
   }
-  .reduce{
-    font-size: 12px;
-  }
+
 }
 @media (min-width: 768px) {
 
   .container {
     max-width: 768px;
   }
-  .reduce{
-    font-size: 20px;
-  }
+
 }
 @media (min-width: 1024px) {
 
