@@ -66,7 +66,7 @@ const HeroSection = () => {
         >
           <div className=" w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] relative image shape">
             <Image
-              src="/images/hero.jpg"
+              src="./portfolio-nextjs/images/hero.jpg"
               alt="hero image"
               className="absolute transform  image-shape "
               width={300}
