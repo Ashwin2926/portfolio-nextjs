@@ -569,7 +569,7 @@ video {
     max-width: 640px;
   }
   .reduce{
-    font-size: small;
+    font-size: 12px;
   }
 }
 @media (min-width: 768px) {
@@ -578,7 +578,7 @@ video {
     max-width: 768px;
   }
   .reduce{
-    font-size: small;
+    font-size: 20px;
   }
 }
 @media (min-width: 1024px) {
