@@ -18,7 +18,7 @@ const projectsData = [
     id: 2,
     title: "Lodge Website",
     description: "react with Laravel backend ",
-    image: "/images/projects/2.png",
+    image: "./portfolio-nextjs/images/projects/2.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
     previewUrl: "/",
