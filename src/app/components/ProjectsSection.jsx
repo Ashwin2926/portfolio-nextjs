@@ -9,7 +9,7 @@ const projectsData = [
     id: 1,
     title: "Management system",
     description: "Laravel project",
-    image: "../../../public/images/projects/1.png",
+    image: "./images/projects/1.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
     previewUrl: "/",
