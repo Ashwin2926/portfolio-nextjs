@@ -12,7 +12,7 @@ const projectsData = [
     image: "./images/projects/1.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
-    previewUrl: "/",
+    previewUrl: "",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const projectsData = [
     image: "./images/projects/2.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
-    previewUrl: "/",
+    previewUrl: "",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const projectsData = [
     image: "./images/projects/3.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Ashwin2926/website-Laravel10-back-control",
-    previewUrl: "/",
+    previewUrl: "https://graceunlimitedrevivalctr.com/",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const projectsData = [
     image: "./images/projects/mobile1.jpg",
     tag: ["All", "Mobile"],
     gitUrl: "https://github.com/Ashwin2926/hymn-book",
-    previewUrl: "/",
+    previewUrl: "",
   },
   {
     id: 5,
@@ -47,8 +47,8 @@ const projectsData = [
     description: "Authentication and CRUD operations",
     image: "./images/projects/5.png",
     tag: ["All", "Web"],
-    gitUrl: "/",
-    previewUrl: "/",
+    gitUrl: "",
+    previewUrl: "",
   },
 
 ];
