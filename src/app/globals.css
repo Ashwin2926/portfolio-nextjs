@@ -1213,7 +1213,7 @@ body {
   }
 
   .sm\:text-5xl {
-    font-size: 0.2rem;
+    font-size: 1.125rem;
     line-height: 1;
   }
 
@@ -1294,11 +1294,11 @@ body {
   }
 
   .md\:text-5xl {
-    font-size: 0.4rem;
+    font-size: 1.125rem;
     line-height: 1;
   }
   .text-4xl {
-    font-size: 1rem;
+    font-size: 1.125rem;
     line-height: 1rem;
   }
 }
