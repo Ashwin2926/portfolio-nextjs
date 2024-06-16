@@ -1379,7 +1379,7 @@ body {
 }
 
 .dark-nav{
-  background: #0077b6;
+  background: linear-gradient(to bottom right, #3b82f6, #1d4ed8);
   transition: 0.5s;
 }
 
