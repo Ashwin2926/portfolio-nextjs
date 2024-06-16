@@ -17,20 +17,20 @@ const HeroSection = () => {
         >
           <p className="text-black font-bold mb-4 text-4xl sm:text-5xl  ">
             <span className=" text-transparent font-bold bg-clip-text bg-gradient-to-br from-blue-500 to-blue-700">
-              Hi, I&apos;m Ashwin {" "}
+              Hi, I&apos;m Ashwin {" "}Developer
             </span>
             <br></br>
             <TypeAnimation
               sequence={[
-                "Software Developer ",
+                "Software  ",
                 1000,
-                "Backend Developer",
+                "Backend ",
                 1000,
-                "Frontend Developer",
+                "Frontend ",
                 1000,
-                "Mobile Developer",
+                "Mobile ",
                 1000,
-                "Graphic Designer",
+                "Graphic ",
                 1000,
               ]}
               wrapper="span"
