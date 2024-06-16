@@ -17,7 +17,7 @@ const HeroSection = () => {
         >
           <p className="text-black font-bold mb-4 text-4xl sm:text-5xl  ">
             <span className=" text-transparent font-bold bg-clip-text bg-gradient-to-br from-blue-500 to-blue-700">
-              Hi, I&apos;m Ashwin {" "}Developer
+              Hi, I&apos;m Ashwin {" "}
             </span>
             <br></br>
             <TypeAnimation
@@ -37,6 +37,7 @@ const HeroSection = () => {
               speed={50}
               repeat={Infinity}
             />
+            Developer
           </p>
           <p className="text-[#000000] text-base sm:text-lg mb-6 lg:text-xl">
           Delivering Innovative Software Solutions with Precision.
