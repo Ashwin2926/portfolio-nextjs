@@ -37,7 +37,7 @@ const HeroSection = () => {
               speed={50}
               repeat={Infinity}
             />
-            Developer
+           <br></br> Developer
           </p>
           <p className="text-[#000000] text-base sm:text-lg mb-6 lg:text-xl">
           Delivering Innovative Software Solutions with Precision.
