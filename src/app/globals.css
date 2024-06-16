@@ -1226,6 +1226,10 @@ body {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
+  .text-4xl {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1292,6 +1296,10 @@ body {
   .md\:text-5xl {
     font-size: 0.4rem;
     line-height: 1;
+  }
+  .text-4xl {
+    font-size: 1rem;
+    line-height: 1rem;
   }
 }
 
