@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[2].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[12].oneOf[2].use[2]!./node_modules/next/font/google/target.css?{"path":"src\\app\\layout.js","import":"Inter","arguments":[{"subsets":["latin"]}],"variableName":"inter"} ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/* cyrillic-ext */
+
 @font-face {
   font-family: '__Inter_aaf875';
   font-style: normal;
@@ -71,15 +68,6 @@
 }.__className_aaf875 {font-family: '__Inter_aaf875', '__Inter_Fallback_aaf875';font-style: normal
 }
 
-/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./src/app/globals.css ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************/
-/*
-! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
-*//*
-1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
-2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
-*/
 
 *,
 ::before,
@@ -125,11 +113,7 @@ body {
   line-height: inherit; /* 2 */
 }
 
-/*
-1. Add the correct height in Firefox.
-2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
-3. Ensure horizontal rules are visible by default.
-*/
+
 
 hr {
   height: 0; /* 1 */
@@ -394,10 +378,7 @@ textarea {
   resize: vertical;
 }
 
-/*
-1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
-2. Set the default placeholder color to the user's configured gray 400 color.
-*/
+
 
 input::-moz-placeholder, textarea::-moz-placeholder {
   opacity: 1; /* 1 */
@@ -428,11 +409,6 @@ Make sure disabled buttons don't get the pointer cursor.
   cursor: default;
 }
 
-/*
-1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
-2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
-   This can trigger a poorly considered lint error in some tools but is included by design.
-*/
 
 img,
 svg,
@@ -446,9 +422,6 @@ object {
   vertical-align: middle; /* 2 */
 }
 
-/*
-Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
-*/
 
 img,
 video {
@@ -1240,7 +1213,7 @@ body {
   }
 
   .sm\:text-5xl {
-    font-size: 1rem;
+    font-size: 0.2rem;
     line-height: 1;
   }
 
@@ -1317,7 +1290,7 @@ body {
   }
 
   .md\:text-5xl {
-    font-size: 3rem;
+    font-size: 0.4rem;
     line-height: 1;
   }
 }
@@ -1362,7 +1335,7 @@ body {
   }
 
   .lg\:leading-normal {
-    line-height: 1.5;
+    line-height: 1;
   }
 }
 
