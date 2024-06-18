@@ -50,6 +50,25 @@ const projectsData = [
     gitUrl: "",
     previewUrl: "",
   },
+  {
+    id: 6,
+    title: "Management system",
+    description: "Laravel",
+    image: "./images/projects/6.png",
+    tag: ["All", "Web"],
+    gitUrl: "https://github.com/Ashwin2926/JayStoreECommerce",
+    previewUrl: "",
+  },
+  {
+    id: 7,
+    title: "Ecommerce Shoe-Shop",
+    description: "Authentication and product viewing(PHP<HTML,CSS)",
+    image: "./images/projects/7.png",
+    tag: ["All", "Web"],
+    gitUrl: "https://github.com/Ashwin2926/JayStoreECommerce",
+    previewUrl: "",
+  },
+  
 
 ];
 
