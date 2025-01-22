@@ -11,6 +11,7 @@ const projectsData = [
     description: "Laravel project",
     image: "./images/projects/1.png",
     tag: ["All", "Web"],
+    gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
     previewUrl: "",
   },
   {
@@ -19,6 +20,7 @@ const projectsData = [
     description: "react with Laravel backend ",
     image: "./images/projects/2.png",
     tag: ["All", "Web"],
+    gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
     previewUrl: "",
   },
   {
@@ -27,6 +29,7 @@ const projectsData = [
     description: "React project",
     image: "./images/projects/3.png",
     tag: ["All", "Web"],
+    gitUrl: "https://github.com/Ashwin2926/website-Laravel10-back-control",
     previewUrl: "https://graceunlimitedrevivalctr.com/",
   },
   {
@@ -35,6 +38,7 @@ const projectsData = [
     description: "Flutter Application",
     image: "./images/projects/mobile1.jpg",
     tag: ["All", "Mobile"],
+    gitUrl: "https://github.com/Ashwin2926/hymn-book",
     previewUrl: "",
   },
   {
@@ -52,6 +56,7 @@ const projectsData = [
     description: "Laravel",
     image: "./images/projects/6.png",
     tag: ["All", "Web"],
+    gitUrl: "https://github.com/Ashwin2926/JayStoreECommerce",
     previewUrl: "",
   },
   {
@@ -60,6 +65,7 @@ const projectsData = [
     description: "Authentication and product viewing(PHP<HTML,CSS)",
     image: "./images/projects/7.png",
     tag: ["All", "Web"],
+    gitUrl: "https://github.com/Ashwin2926/JayStoreECommerce",
     previewUrl: "",
   },
   
@@ -120,6 +126,7 @@ const ProjectsSection = () => {
               title={project.title}
               description={project.description}
               imgUrl={project.image}
+              gitUrl={project.gitUrl}
               previewUrl={project.previewUrl}
             />
           </motion.li>   
