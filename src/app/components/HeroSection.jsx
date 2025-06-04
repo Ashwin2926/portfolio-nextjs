@@ -85,7 +85,7 @@ const HeroSection = () => {
         >
           <div className={`${styles.heroImageWrapper} w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] lg:w-[300px] lg:h-[300px] xl:w-[350px] xl:h-[350px] relative mx-auto sm:mx-0`}>
             <Image
-              src="/images/hero.jpg"
+              src="./images/hero.jpg"
               alt="Ashwin - Developer"
               fill
               className={`object-cover rounded-full ${styles.heroImageEnhanced}`}
