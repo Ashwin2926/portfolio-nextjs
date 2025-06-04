@@ -68,7 +68,7 @@ const TABS_ORDER = ["skills", "education", "certifications"];
 // --- Image Asset ---
 // Ensure this path is correct. If your image is in `public/images/circle2.png`, use "/images/circle2.png".
 // If it's directly in `public/circle2.png`, use "/circle2.png".
-const PROFILE_IMAGE_PATH = "/images/circle2.png"; // ADJUST if your image is named differently or in a subfolder of public/images
+const PROFILE_IMAGE_PATH = "./images/circle2.png"; // ADJUST if your image is named differently or in a subfolder of public/images
 
 const AboutSection = () => {
   const [activeTab, setActiveTab] = useState("skills");
