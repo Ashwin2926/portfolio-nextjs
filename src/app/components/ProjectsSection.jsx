@@ -6,12 +6,43 @@ import { motion, useInView } from "framer-motion";
 
 const projectsData = [
   {
+    id: 8,
+    title: "Shipping website",
+    description: "",
+    image: "./images/projects/prevailshipping.png",
+    tag: ["All", "Web"],
+    previewUrl: "https://prevailshipping.com",
+  },
+    {
+    id: 9,
+    title: "TAP website",
+    description: "",
+    image: "./images/projects/tap.png",
+    tag: ["All", "Web"],
+    previewUrl: "https://talkandpay.com",
+  },
+    {
+    id: 10,
+    title: "Real estate",
+    description: "",
+    image: "./images/projects/capitalstay.png",
+    tag: ["All", "Web"],
+    previewUrl: "https://capitalstayuae.com",
+  },
+      {
+    id: 11,
+    title: "Breathtakingkeeps Vacations",
+    description: "",
+    image: "./images/projects/breathtakingkeeps.png",
+    tag: ["All", "Web"],
+    previewUrl: "https://breathtakingkeeps.site/",
+  },
+  {
     id: 1,
     title: "Management system",
     description: "Laravel project",
     image: "./images/projects/1.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
     previewUrl: "",
   },
   {
@@ -20,7 +51,6 @@ const projectsData = [
     description: "react with Laravel backend ",
     image: "./images/projects/2.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/Ashwin2926/Guest-house-laravel",
     previewUrl: "",
   },
   {
@@ -29,8 +59,7 @@ const projectsData = [
     description: "React project",
     image: "./images/projects/3.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/Ashwin2926/website-Laravel10-back-control",
-    previewUrl: "https://graceunlimitedrevivalctr.com/",
+    previewUrl: " ",
   },
   {
     id: 4,
@@ -43,12 +72,12 @@ const projectsData = [
   },
   {
     id: 5,
-    title: "React Firebase Template",
-    description: "Authentication and CRUD operations",
-    image: "./images/projects/5.png",
+    title: "Kiosk App",
+    description: "",
+    image: "./images/projects/kiosk.png",
     tag: ["All", "Web"],
     gitUrl: "",
-    previewUrl: "",
+    previewUrl: "https://kiosk.talkandpay.com/",
   },
   {
     id: 6,
@@ -56,7 +85,6 @@ const projectsData = [
     description: "Laravel",
     image: "./images/projects/6.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/Ashwin2926/JayStoreECommerce",
     previewUrl: "",
   },
   {
@@ -65,9 +93,10 @@ const projectsData = [
     description: "Authentication and product viewing(PHP<HTML,CSS)",
     image: "./images/projects/7.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/Ashwin2926/JayStoreECommerce",
     previewUrl: "",
   },
+    
+  
   
 
 ];

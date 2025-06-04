@@ -1,24 +1,17 @@
+// ./components/TabButton.jsx (Example)
 import React from "react";
-import { motion } from "framer-motion";
-
-const variants = {
-  default: { width: 0 },
-  active: { width: "calc(100% - 0.75rem)" },
-};
 
 const TabButton = ({ active, selectTab, children }) => {
-  const buttonClasses = active ? "text-black" : "text-[#000000]";
+  const activeClasses = active
+    ? "text-[#64FFDA] border-b-2 border-[#64FFDA]" // Active tab has teal text and underline
+    : "text-[#8892B0] hover:text-[#CCD6F6]"; // Inactive tab is dimmer, brightens on hover
 
   return (
-    <button onClick={selectTab}>
-      <p className={`mr-3 font-semibold hover:text-blue ${buttonClasses}`}>
-        {children}
-      </p>
-      <motion.div
-        animate={active ? "active" : "default"}
-        variants={variants}
-        className="h-1 bg-gradient-to-br from-blue-500 to-blue-700 mt-2 mr-3"
-      ></motion.div>
+    <button
+      onClick={selectTab}
+      className={`pb-2 px-1 font-medium text-lg focus:outline-none transition-colors duration-200 ease-in-out ${activeClasses}`}
+    >
+      {children}
     </button>
   );
 };
