@@ -13,6 +13,14 @@ const projectsData = [
     tag: ["All", "Web"],
     previewUrl: "https://prevailshipping.com",
   },
+     {
+    id: 12,
+    title: "React Profile",
+    description: "",
+    image: "./images/projects/haleefa.png",
+    tag: ["All", "Web"],
+    previewUrl: "https://www.haleefaelitehomes.com/",
+  },
     {
     id: 9,
     title: "TAP website",
@@ -28,6 +36,14 @@ const projectsData = [
     image: "./images/projects/capitalstay.png",
     tag: ["All", "Web"],
     previewUrl: "https://capitalstayuae.com",
+  },
+     {
+    id: 13,
+    title: "Dilex shipping",
+    description: "",
+    image: "./images/projects/dilex.png",
+    tag: ["All", "Web"],
+    previewUrl: "https://dilexfreight.com/",
   },
       {
     id: 11,
