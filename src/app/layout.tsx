@@ -1,22 +1,32 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Syne } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", ],
+  variable: "--font-syne",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Portifolio | Ashwin",
-  description: "Ashwin Munashe Nyamainashe",
+  title: "Ashwin Nyamainashe — Software Engineer",
+  description:
+    "Full-stack software engineer specialising in React, Laravel, Flutter and cross-platform web apps.",
+  keywords: ["software engineer", "full stack", "react", "laravel", "flutter", "ashwin"],
+  openGraph: {
+    title: "Ashwin Nyamainashe — Software Engineer",
+    description: "Delivering innovative software solutions with precision.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={syne.variable}>
+      <body className={syne.className}>{children}</body>
     </html>
   );
 }
