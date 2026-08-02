@@ -80,7 +80,7 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="relative bg-[#060B14] py-24 md:py-32 overflow-hidden" id="about">
+    <section className="relative bg-[#060B14] py-16 md:py-20 overflow-hidden" id="about">
       {/* Subtle background accent */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#F59E0B] opacity-[0.04] blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-[#3B82F6] opacity-[0.04] blur-[80px] pointer-events-none" />
@@ -88,28 +88,27 @@ const AboutSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
 
         {/* Section header */}
-        <div className="mb-16 flex items-center gap-4">
-          <span className="text-[#F59E0B] text-xs tracking-[0.3em] uppercase font-semibold">02 —</span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
+        <div className="mb-10 flex items-center gap-4">
+          <span className="w-6 h-1 rounded-full bg-[#F59E0B] flex-shrink-0" />
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white">
             About Me
           </h2>
-          <div className="flex-1 h-px bg-gradient-to-r from-[#1E293B] to-transparent" />
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
 
           {/* Image column */}
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
             <div className="relative">
               {/* Decorative frame offset */}
-              <div className="absolute top-6 left-6 w-full h-full rounded-2xl border border-[#F59E0B]/20" />
-              <div className="relative w-72 h-80 sm:w-80 sm:h-[380px] rounded-2xl overflow-hidden border border-[#1E293B] shadow-2xl bg-[#0F172A]">
+              <div className="absolute top-5 left-5 w-full h-full rounded-2xl border border-[#F59E0B]/20" />
+              <div className="relative w-60 h-64 sm:w-64 sm:h-[300px] rounded-2xl overflow-hidden border border-[#1E293B] shadow-2xl bg-[#0F172A]">
                 <Image
                   src="./images/circle2.png"
-                  alt="Ashwin Nyamainashe — Software Developer"
+                  alt="Ashwin Nyamainashe, Software Developer"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 288px, 320px"
+                  sizes="(max-width: 768px) 240px, 256px"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = `https://ui-avatars.com/api/?name=Ashwin+Nyamainashe&background=0A192F&color=F59E0B&size=420&font-size=0.33&bold=true`;
@@ -117,7 +116,7 @@ const AboutSection = () => {
                 />
                 {/* Bottom name badge */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#060B14] via-[#060B14]/80 to-transparent p-5">
-                  <p className="text-white font-bold text-lg" style={{ fontFamily: "'Syne', sans-serif" }}>Ashwin Nyamainashe</p>
+                  <p className="font-display text-white font-bold text-lg">Ashwin Nyamainashe</p>
                   <p className="text-[#F59E0B] text-xs tracking-widest uppercase mt-0.5">Software Engineer</p>
                 </div>
               </div>
@@ -126,12 +125,12 @@ const AboutSection = () => {
 
           {/* Content column */}
           <div className="lg:col-span-7 flex flex-col">
-            <p className="text-[#64748B] text-lg leading-relaxed mb-10">
+            <p className="text-[#64748B] text-base leading-relaxed mb-8">
               I&apos;m a passionate full-stack developer dedicated to crafting interactive,
               responsive, and visually engaging applications. With expertise spanning{" "}
               <span className="text-[#94A3B8] font-medium">Flutter, React, Laravel, Power BI, C#, MySQL</span>{" "}
               and modern frontend technologies, I bring a versatile skill set to every project.
-              My background in graphic design complements my technical abilities — building solutions
+              My background in graphic design complements my technical abilities, building solutions
               that are both highly functional and aesthetically pleasing.
             </p>
 

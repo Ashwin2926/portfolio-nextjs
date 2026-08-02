@@ -3,9 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Syne Display Font ── */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800;900&display=swap');
-
 :root {
   --bg:        #060B14;
   --surface:   #0A1628;

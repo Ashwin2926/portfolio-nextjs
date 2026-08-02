@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "nextjs": {
+      "source": "pproenca/dot-skills",
+      "sourceType": "github",
+      "skillPath": "skills/.curated/nextjs/SKILL.md",
+      "computedHash": "44cf413595d9d7e762a6a1e315ca809d705b3c241fd35581e3f8febd7d732d36"
+    }
+  }
+}

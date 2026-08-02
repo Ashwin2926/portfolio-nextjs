@@ -5,10 +5,11 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { BoltIcon } from "@heroicons/react/24/solid";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#060B14]">
+    <section className="relative min-h-[100dvh] flex items-center overflow-hidden bg-[#060B14]">
       
       {/* Background texture / grid */}
       <div
@@ -25,7 +26,7 @@ const HeroSection = () => {
       {/* Radial glow bottom-right */}
       <div className="absolute -bottom-40 -right-20 w-[500px] h-[500px] rounded-full bg-[#3B82F6] opacity-[0.07] blur-[100px] pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 lg:py-32">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
           {/* ── Text Column ── */}
@@ -49,14 +50,13 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-black leading-[1.05] mb-6"
-              style={{ fontFamily: "'Syne', sans-serif" }}
+              className="font-display font-bold leading-[1.05] mb-6"
             >
-              <span className="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white">
+              <span className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white">
                 Hi, I&apos;m
               </span>
               <span
-                className="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl"
+                className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl"
                 style={{
                   background: "linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #EC4899 100%)",
                   WebkitBackgroundClip: "text",
@@ -66,7 +66,7 @@ const HeroSection = () => {
               >
                 Ashwin
               </span>
-              <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-[#94A3B8] font-light mt-2 tracking-wide">
+              <span className="block text-xl sm:text-3xl lg:text-4xl xl:text-5xl text-[#94A3B8] font-light mt-2 tracking-wide">
                 <TypeAnimation
                   sequence={[
                     "Software Engineer",
@@ -90,10 +90,10 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-[#64748B] text-lg lg:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0"
+              className="text-[#64748B] text-base lg:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
             >
-              Delivering innovative software solutions — from polished web apps to
-              cross-platform mobile experiences — with precision and craft.
+              Delivering innovative software solutions, from polished web apps to
+              cross-platform mobile experiences, built with precision and craft.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -105,7 +105,7 @@ const HeroSection = () => {
             >
               <Link
                 href="/#contact"
-                className="group relative inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-[#060B14] bg-[#F59E0B] overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(245,158,11,0.4)] hover:scale-[1.03]"
+                className="group relative inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-[#060B14] bg-[#F59E0B] overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(245,158,11,0.4)] hover:scale-[1.03]"
               >
                 <span className="relative z-10 tracking-wide">Let&apos;s Talk</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#F59E0B] to-[#EF4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -115,7 +115,7 @@ const HeroSection = () => {
               <Link
                 href="/assets/ashwin_nyamainashe_resume.pdf"
                 download
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-[#CBD5E1] border border-[#1E293B] bg-[#0F172A] hover:border-[#F59E0B]/50 hover:text-white hover:bg-[#1E293B] transition-all duration-300 tracking-wide"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-[#CBD5E1] border border-[#1E293B] bg-[#0F172A] hover:border-[#F59E0B]/50 hover:text-white hover:bg-[#1E293B] transition-all duration-300 tracking-wide"
               >
                 Download CV
                 <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -129,15 +129,13 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.65 }}
-              className="flex items-center gap-8 mt-12 justify-center lg:justify-start"
+              className="flex flex-wrap items-center gap-x-6 gap-y-4 sm:gap-x-8 mt-12 justify-center lg:justify-start"
             >
               {[
                 { value: "5+", label: "Years Exp." },
-                { value: "100+", label: "Projects" },
-                { value: "7", label: "Awards" },
               ].map(({ value, label }) => (
                 <div key={label} className="text-center lg:text-left">
-                  <p className="text-2xl font-black text-white" style={{ fontFamily: "'Syne', sans-serif" }}>{value}</p>
+                  <p className="font-display text-2xl font-bold text-white">{value}</p>
                   <p className="text-xs text-[#475569] tracking-widest uppercase">{label}</p>
                 </div>
               ))}
@@ -169,13 +167,13 @@ const HeroSection = () => {
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#EF4444] blur-2xl opacity-20 scale-90" />
 
               {/* Image */}
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[360px] lg:h-[360px] rounded-full overflow-hidden border-2 border-[#1E293B] shadow-2xl">
+              <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-[#1E293B] shadow-2xl">
                 <Image
                   src="./images/hero.jpg"
-                  alt="Ashwin — Software Engineer"
+                  alt="Ashwin, Software Engineer"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 360px"
+                  sizes="(max-width: 768px) 208px, (max-width: 1024px) 256px, 288px"
                   priority
                 />
               </div>
@@ -188,11 +186,11 @@ const HeroSection = () => {
                 className="absolute -bottom-4 -left-4 bg-[#0F172A] border border-[#1E293B] rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3"
               >
                 <div className="w-8 h-8 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center">
-                  <span className="text-lg">⚡</span>
+                  <BoltIcon className="w-4 h-4 text-[#F59E0B]" />
                 </div>
                 <div>
                   <p className="text-white text-sm font-bold">Full-Stack</p>
-                  <p className="text-[#475569] text-xs">React · Laravel · Flutter</p>
+                  <p className="text-[#475569] text-xs">React, Laravel, Flutter</p>
                 </div>
               </motion.div>
             </div>

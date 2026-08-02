@@ -53,7 +53,7 @@ const Navbar = () => {
               />
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-white text-sm font-black tracking-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
+              <span className="font-display text-white text-sm font-bold tracking-tight">
                 Ashwin<span className="text-[#F59E0B]">.</span>
               </span>
               <span className="text-[#334155] text-[10px] tracking-[0.15em] uppercase">Portfolio</span>
@@ -77,7 +77,7 @@ const Navbar = () => {
                 }}
                 className="px-5 py-2 rounded-full text-sm font-semibold text-[#060B14] bg-[#F59E0B] hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:scale-105 transition-all duration-200 tracking-wide"
               >
-                Hire Me
+                Let&apos;s Talk
               </Link>
             </li>
           </ul>

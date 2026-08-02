@@ -9,12 +9,12 @@ const Footer = () => {
       {/* Decorative top gradient line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F59E0B]/30 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
 
           {/* Brand */}
           <div className="flex items-center gap-2">
-            <span className="text-[#F59E0B] text-xl font-black" style={{ fontFamily: "'Syne', sans-serif" }}>AN</span>
+            <span className="font-display text-[#F59E0B] text-xl font-bold">AN</span>
             <span className="w-px h-4 bg-[#1E293B]" />
             <span className="text-[#334155] text-sm">Ashwin Munashe Nyamainashe</span>
           </div>

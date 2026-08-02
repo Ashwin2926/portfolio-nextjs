@@ -25,7 +25,7 @@ const MenuOverlay = ({ links, closeMenu }) => {
           >
             <div className="flex items-center gap-4">
               <span className="text-[#F59E0B]/40 text-xs font-bold tracking-widest">0{index + 1}</span>
-              <span className="text-white text-xl font-bold group-hover:text-[#F59E0B] transition-colors duration-200" style={{ fontFamily: "'Syne', sans-serif" }}>
+              <span className="font-display text-white text-xl font-bold group-hover:text-[#F59E0B] transition-colors duration-200">
                 {link.title}
               </span>
             </div>
