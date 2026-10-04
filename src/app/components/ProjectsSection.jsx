@@ -57,7 +57,8 @@ const projectsData = [
   {
     id: 17, title: "Tareeqk Roadside Assistance", description: "Customer mobile app for Tareeqk: request instant car recovery, track provider ETA in real time, and pay securely in-app.",
     screens: ["./images/projects/tareeqk-customer.jpeg", "./images/projects/tareeqk-customer-2.jpeg"],
-    tag: ["All", "Mobile"],
+    tag: ["All", "Mobile"], appStoreUrl: "https://apps.apple.com/in/app/tareeqk-roadside-assistances/id6480442854",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.tareeqk.order",
   },
   {
     id: 18, title: "Tareeqk Driver", description: "Provider-side mobile app for Tareeqk's recovery network: job dispatch, acceptance and real-time navigation for drivers.",
