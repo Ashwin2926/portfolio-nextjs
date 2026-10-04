@@ -62,7 +62,8 @@ const projectsData = [
   {
     id: 18, title: "Tareeqk Driver", description: "Provider-side mobile app for Tareeqk's recovery network: job dispatch, acceptance and real-time navigation for drivers.",
     screens: ["./images/projects/tareeqk-driver.jpeg", "./images/projects/tareeqk-driver-2.jpeg"],
-    tag: ["All", "Mobile"], appStoreUrl: "https://apps.apple.com/app/id6497716306",
+    tag: ["All", "Mobile"], appStoreUrl: "https://apps.apple.com/pk/app/tareeqk-driver/id6497716306",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.tareeqk.dispatcher&hl=en",
   },
   {
     id: 1, title: "Management System", description: "Laravel-powered enterprise management system with full CRUD and auth.",
