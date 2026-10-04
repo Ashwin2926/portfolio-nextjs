@@ -3,15 +3,16 @@ import React, { useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-  CodeBracketIcon, EyeIcon,
-  SparklesIcon, SwatchIcon, TruckIcon, DevicePhoneMobileIcon, WrenchScrewdriverIcon,
+  CodeBracketIcon, EyeIcon, ArrowDownTrayIcon,
+  SparklesIcon, SwatchIcon,
 } from "@heroicons/react/24/outline";
 
 /* ─── Data ─────────────────────────────────────────────────── */
 const projectsData = [
   {
     id: 14, title: "Tareeqk Portal", description: "Order & dispatch portal for Tareeqk, a Dubai-based car recovery and roadside assistance platform, with live service requests, provider tracking and job management.",
-    icon: TruckIcon, tag: ["All", "Web"],
+    image: "./images/projects/tareeqk-web.png", hoverImage: "./images/projects/tareeqk-web-2.png",
+    tag: ["All", "Web"], previewUrl: "https://tareeqk.ae/en",
   },
   {
     id: 15, title: "Tessera Beauty", description: "Full-stack skincare & beauty commerce platform: Next.js storefront with cart, loyalty program and reviews, backed by a FastAPI system handling M-Pesa payments, invoicing, stock and commissions.",
@@ -55,11 +56,13 @@ const projectsData = [
   },
   {
     id: 17, title: "Tareeqk Roadside Assistance", description: "Customer mobile app for Tareeqk: request instant car recovery, track provider ETA in real time, and pay securely in-app.",
-    icon: DevicePhoneMobileIcon, tag: ["All", "Mobile"],
+    screens: ["./images/projects/tareeqk-customer.jpeg", "./images/projects/tareeqk-customer-2.jpeg"],
+    tag: ["All", "Mobile"],
   },
   {
     id: 18, title: "Tareeqk Driver", description: "Provider-side mobile app for Tareeqk's recovery network: job dispatch, acceptance and real-time navigation for drivers.",
-    icon: WrenchScrewdriverIcon, tag: ["All", "Mobile"],
+    screens: ["./images/projects/tareeqk-driver.jpeg", "./images/projects/tareeqk-driver-2.jpeg"],
+    tag: ["All", "Mobile"], appStoreUrl: "https://apps.apple.com/app/id6497716306",
   },
   {
     id: 1, title: "Management System", description: "Laravel-powered enterprise management system with full CRUD and auth.",
@@ -123,7 +126,7 @@ const spanClass = (i) => {
 
 const BentoCard = ({ project, index }) => {
   const big = index % 7 === 0;
-  const hasLinks = Boolean(project.previewUrl || project.gitUrl);
+  const hasLinks = Boolean(project.previewUrl || project.gitUrl || project.appStoreUrl || project.playStoreUrl);
 
   return (
     <motion.div
@@ -138,11 +141,34 @@ const BentoCard = ({ project, index }) => {
         <div className="group relative h-full min-h-[220px] rounded-2xl overflow-hidden border border-[#1E293B] hover:border-[#F59E0B]/40 transition-colors duration-300 bg-[#0A1628] shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
 
           {/* Media */}
-          {project.image ? (
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.06]"
-              style={{ backgroundImage: `url(${project.image})` }}
-            />
+          {project.screens ? (
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0A1628] to-[#16233C]">
+              <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle, #F59E0B 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
+              <div className="absolute inset-x-0 top-6 bottom-0 flex items-start justify-center gap-3 transition-transform duration-700 group-hover:scale-[1.06]">
+                {project.screens.map((src, i) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`${project.title} screenshot ${i + 1}`}
+                    loading="lazy"
+                    className={`h-[85%] w-auto rounded-xl border-2 border-[#1E293B] shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${i % 2 ? "rotate-3 translate-y-4" : "-rotate-3"}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : project.image ? (
+            <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.06]">
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${project.image})` }}
+              />
+              {project.hoverImage && (
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                  style={{ backgroundImage: `url(${project.hoverImage})` }}
+                />
+              )}
+            </div>
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0A1628] to-[#16233C] transition-transform duration-700 group-hover:scale-[1.06]">
               <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle, #F59E0B 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
@@ -175,6 +201,18 @@ const BentoCard = ({ project, index }) => {
                 <Link href={project.gitUrl} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold hover:bg-white hover:text-[#060B14] transition-all duration-200">
                   <CodeBracketIcon className="w-3.5 h-3.5" /> Code
+                </Link>
+              )}
+              {project.appStoreUrl && (
+                <Link href={project.appStoreUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#F59E0B] text-[#060B14] text-xs font-bold hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all duration-200">
+                  <ArrowDownTrayIcon className="w-3.5 h-3.5" /> App Store
+                </Link>
+              )}
+              {project.playStoreUrl && (
+                <Link href={project.playStoreUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold hover:bg-white hover:text-[#060B14] transition-all duration-200">
+                  <ArrowDownTrayIcon className="w-3.5 h-3.5" /> Google Play
                 </Link>
               )}
             </div>
