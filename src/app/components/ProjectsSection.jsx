@@ -16,7 +16,7 @@ const projectsData = [
   },
   {
     id: 15, title: "Tessera Beauty", description: "Full-stack skincare & beauty commerce platform: Next.js storefront with cart, loyalty program and reviews, backed by a FastAPI system handling M-Pesa payments, invoicing, stock and commissions.",
-    image: "./images/projects/tessera.png", tag: ["All", "Web"], previewUrl: "http://tesserakoreanbeauty.co.ke/",
+    image: "./images/projects/tessera.png", tag: ["All", "Web"], previewUrl: "https://www.tesserakoreanbeauty.co.ke/",
   },
   {
     id: 8, title: "Prevail Shipping", description: "Full shipping & logistics company website with service listings, tracking info and contact flows.",
