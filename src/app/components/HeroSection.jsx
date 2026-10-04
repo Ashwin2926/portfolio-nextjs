@@ -169,7 +169,7 @@ const HeroSection = () => {
               {/* Image */}
               <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-[#1E293B] shadow-2xl">
                 <Image
-                  src="./images/hero.jpg"
+                  src="./images/profile.png"
                   alt="Ashwin, Software Engineer"
                   fill
                   className="object-cover"
