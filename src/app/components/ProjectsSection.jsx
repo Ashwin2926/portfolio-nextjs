@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   CodeBracketIcon, EyeIcon, ArrowDownTrayIcon,
-  SwatchIcon,
 } from "@heroicons/react/24/outline";
 
 /* ─── Data ─────────────────────────────────────────────────── */
@@ -48,7 +47,8 @@ const projectsData = [
   },
   {
     id: 16, title: "My Design Studio", description: "Agency-style site for a design studio, with an animated hero, services, portfolio showcase and journal, built with Next.js, GSAP and Framer Motion.",
-    icon: SwatchIcon, tag: ["All", "Web"],
+    image: "./images/projects/design-studio.png", hoverImage: "./images/projects/design-studio-2.png",
+    tag: ["All", "Web"], previewUrl: "https://my-design-studio-ivory.vercel.app/",
   },
   {
     id: 4, title: "Hymn Book App", description: "Cross-platform Flutter mobile application for browsing and reading hymns.",
