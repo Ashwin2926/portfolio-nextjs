@@ -7,8 +7,8 @@
   --bg:        #060B14;
   --surface:   #0A1628;
   --border:    #1E293B;
-  --amber:     #F59E0B;
-  --amber-dim: rgba(245, 158, 11, 0.12);
+  --amber:     #D4AF6E;
+  --amber-dim: rgba(212,175,110, 0.12);
   --text:      #CBD5E1;
   --muted:     #475569;
 }
@@ -29,7 +29,7 @@ body {
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(245, 158, 11, 0.25);
+  background: rgba(212,175,110, 0.25);
   color: #fff;
 }
 
@@ -45,12 +45,12 @@ body {
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #F59E0B;
+  background: #D4AF6E;
 }
 
 /* ── Focus rings ── */
 *:focus-visible {
-  outline: 2px solid rgba(245, 158, 11, 0.6);
+  outline: 2px solid rgba(212,175,110, 0.6);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -58,4 +58,17 @@ body {
 /* ── Smooth image rendering ── */
 img {
   image-rendering: auto;
+}
+/* ── Clients marquee ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee { animation: none; }
 }

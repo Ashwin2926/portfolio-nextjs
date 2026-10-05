@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import { scrollToHash } from "./NavLink";
 
 const MenuOverlay = ({ links, closeMenu }) => {
   return (
     <div className="fixed inset-0 z-30 flex flex-col bg-[#060B14]/98 backdrop-blur-xl pt-20">
       {/* Top amber accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F59E0B] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF6E] to-transparent" />
 
       {/* Nav items */}
       <nav className="flex flex-col items-center justify-center flex-1 gap-2 px-8">
@@ -14,22 +15,19 @@ const MenuOverlay = ({ links, closeMenu }) => {
             key={index}
             href={link.path}
             onClick={(e) => {
-              if (link.path.startsWith("#")) {
-                e.preventDefault();
-                document.querySelector(link.path)?.scrollIntoView({ behavior: "smooth" });
-              }
+              scrollToHash(e, link.path);
               closeMenu?.();
             }}
-            className="group w-full max-w-xs flex items-center justify-between px-6 py-5 rounded-2xl border border-[#1E293B] bg-[#0A1628] hover:border-[#F59E0B]/40 hover:bg-[#F59E0B]/5 transition-all duration-200"
+            className="group w-full max-w-xs flex items-center justify-between px-6 py-5 rounded-2xl border border-[#1E293B] bg-[#0A1628] hover:border-[#D4AF6E]/40 hover:bg-[#D4AF6E]/5 transition-all duration-200"
             style={{ animationDelay: `${index * 80}ms` }}
           >
             <div className="flex items-center gap-4">
-              <span className="text-[#F59E0B]/40 text-xs font-bold tracking-widest">0{index + 1}</span>
-              <span className="font-display text-white text-xl font-bold group-hover:text-[#F59E0B] transition-colors duration-200">
+              <span className="text-[#D4AF6E]/40 text-xs font-bold tracking-widest">0{index + 1}</span>
+              <span className="font-display text-[#F4EFE6] text-2xl font-medium group-hover:text-[#D4AF6E] transition-colors duration-200">
                 {link.title}
               </span>
             </div>
-            <svg className="w-4 h-4 text-[#334155] group-hover:text-[#F59E0B] group-hover:translate-x-1 transition-all duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 text-[#334155] group-hover:text-[#D4AF6E] group-hover:translate-x-1 transition-all duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
@@ -44,7 +42,7 @@ const MenuOverlay = ({ links, closeMenu }) => {
         </a>
         <span className="w-1 h-1 rounded-full bg-[#1E293B]" />
         <a href="https://www.linkedin.com/in/ashwin-nyamainashe/" target="_blank" rel="noopener noreferrer"
-          className="text-[#334155] hover:text-[#F59E0B] transition-colors duration-200 text-xs tracking-widest uppercase">
+          className="text-[#334155] hover:text-[#D4AF6E] transition-colors duration-200 text-xs tracking-widest uppercase">
           LinkedIn
         </a>
       </div>

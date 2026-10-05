@@ -1,122 +1,13 @@
 "use client";
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-  CodeBracketIcon, EyeIcon, ArrowDownTrayIcon,
+  CodeBracketIcon, EyeIcon, ArrowDownTrayIcon, ArrowRightIcon,
 } from "@heroicons/react/24/outline";
-
-/* ─── Data ─────────────────────────────────────────────────── */
-const projectsData = [
-  {
-    id: 14, title: "Tareeqk Portal", description: "Order & dispatch portal for Tareeqk, a Dubai-based car recovery and roadside assistance platform, with live service requests, provider tracking and job management.",
-    image: "./images/projects/tareeqk-web.png", hoverImage: "./images/projects/tareeqk-web-2.png",
-    tag: ["All", "Web"], previewUrl: "https://tareeqk.ae/en",
-  },
-  {
-    id: 15, title: "Tessera Beauty", description: "Full-stack skincare & beauty commerce platform: Next.js storefront with cart, loyalty program and reviews, backed by a FastAPI system handling M-Pesa payments, invoicing, stock and commissions.",
-    image: "./images/projects/tessera.png", tag: ["All", "Web"], previewUrl: "https://www.tesserakoreanbeauty.co.ke/",
-  },
-  {
-    id: 8, title: "Prevail Shipping", description: "Full shipping & logistics company website with service listings, tracking info and contact flows.",
-    image: "./images/projects/prevailshipping.png", tag: ["All", "Web"], previewUrl: "https://prevailshipping.com",
-  },
-  {
-    id: 9, title: "Talk & Pay", description: "Fintech payment platform: clean marketing site for a modern payment solution.",
-    image: "./images/projects/tap.png", tag: ["All", "Web"], previewUrl: "https://talkandpay.com",
-  },
-  {
-    id: 12, title: "Haleefa Elite Homes", description: "Luxury real estate React profile site showcasing premium properties.",
-    image: "./images/projects/haleefa.png", tag: ["All", "Web"], previewUrl: "https://www.haleefaelitehomes.com/",
-  },
-  {
-    id: 10, title: "Capital Stay UAE", description: "Real estate listings and property discovery platform for UAE market.",
-    image: "./images/projects/capitalstay.png", tag: ["All", "Web"], previewUrl: "https://capitalstayuae.com",
-  },
-  {
-    id: 13, title: "Dilex Freight", description: "International freight forwarding and logistics services site.",
-    image: "./images/projects/dilex.png", tag: ["All", "Web"], previewUrl: "https://dilexfreight.com/",
-  },
-  {
-    id: 11, title: "Breathtakingkeeps", description: "Vacation and travel experiences booking site with immersive design.",
-    image: "./images/projects/breathtakingkeeps.png", tag: ["All", "Web"], previewUrl: "https://breathtakingkeeps.site/",
-  },
-  {
-    id: 5, title: "Kiosk App", description: "Self-service kiosk web application for Talk & Pay.",
-    image: "./images/projects/kiosk.png", tag: ["All", "Web"], previewUrl: "https://kiosk.talkandpay.com/",
-  },
-  {
-    id: 16, title: "My Design Studio", description: "Agency-style site for a design studio, with an animated hero, services, portfolio showcase and journal, built with Next.js, GSAP and Framer Motion.",
-    image: "./images/projects/design-studio.png", hoverImage: "./images/projects/design-studio-2.png",
-    tag: ["All", "Web"], previewUrl: "https://my-design-studio-ivory.vercel.app/",
-  },
-  {
-    id: 4, title: "Hymn Book App", description: "Cross-platform Flutter mobile application for browsing and reading hymns.",
-    image: "./images/projects/mobile1.jpg", tag: ["All", "Mobile"], gitUrl: "https://github.com/Ashwin2926/hymn-book",
-  },
-  {
-    id: 17, title: "Tareeqk Roadside Assistance", description: "Customer mobile app for Tareeqk: request instant car recovery, track provider ETA in real time, and pay securely in-app.",
-    screens: ["./images/projects/tareeqk-customer.jpeg", "./images/projects/tareeqk-customer-2.jpeg"],
-    tag: ["All", "Mobile"], appStoreUrl: "https://apps.apple.com/in/app/tareeqk-roadside-assistances/id6480442854",
-    playStoreUrl: "https://play.google.com/store/apps/details?id=com.tareeqk.order",
-  },
-  {
-    id: 18, title: "Tareeqk Driver", description: "Provider-side mobile app for Tareeqk's recovery network: job dispatch, acceptance and real-time navigation for drivers.",
-    screens: ["./images/projects/tareeqk-driver.jpeg", "./images/projects/tareeqk-driver-2.jpeg"],
-    tag: ["All", "Mobile"], appStoreUrl: "https://apps.apple.com/pk/app/tareeqk-driver/id6497716306",
-    playStoreUrl: "https://play.google.com/store/apps/details?id=com.tareeqk.dispatcher&hl=en",
-  },
-  {
-    id: 1, title: "Management System", description: "Laravel-powered enterprise management system with full CRUD and auth.",
-    image: "./images/projects/1.png", tag: ["All", "Web"],
-  },
-  {
-    id: 2, title: "Lodge Website", description: "Hospitality website built with React frontend and Laravel backend.",
-    image: "./images/projects/2.png", tag: ["All", "Web"],
-  },
-  {
-    id: 3, title: "Church Website", description: "Community church platform built with React.",
-    image: "./images/projects/3.png", tag: ["All", "Web"],
-  },
-  {
-    id: 6, title: "Management System II", description: "Second-generation Laravel enterprise management portal.",
-    image: "./images/projects/6.png", tag: ["All", "Web"],
-  },
-  {
-    id: 7, title: "Shoe Shop E-Commerce", description: "E-commerce store with authentication and product browsing (PHP, HTML, CSS).",
-    image: "./images/projects/7.png", tag: ["All", "Web"],
-  },
-];
-
-/* ─── Tilt wrapper (direct DOM mutation, no re-render) ───────── */
-const TiltCard = ({ children, className = "" }) => {
-  const ref = useRef(null);
-
-  const handleMouseMove = (e) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    el.style.transform = `perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) scale3d(1.015,1.015,1.015)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (ref.current) ref.current.style.transform = "perspective(900px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)";
-  };
-
-  return (
-    <div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`h-full transition-transform duration-200 ease-out will-change-transform ${className}`}
-      style={{ transformStyle: "preserve-3d" }}
-    >
-      {children}
-    </div>
-  );
-};
+import { projectsData } from "../data/projects";
+import { asset } from "../../lib/asset";
+import SectionHeading from "./SectionHeading";
 
 /* ─── Bento tile ──────────────────────────────────────────────── */
 const spanClass = (i) => {
@@ -126,111 +17,108 @@ const spanClass = (i) => {
   return "sm:col-span-1 sm:row-span-1";
 };
 
+const solidBtn = "flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#D4AF6E] text-[#060B14] text-xs font-semibold tracking-wide hover:bg-[#F4EFE6] transition-colors duration-300";
+const ghostBtn = "flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#F4EFE6]/30 text-[#F4EFE6] text-xs font-medium tracking-wide hover:bg-[#F4EFE6] hover:text-[#060B14] transition-colors duration-300";
+
 const BentoCard = ({ project, index }) => {
   const big = index % 7 === 0;
-  const hasLinks = Boolean(project.previewUrl || project.gitUrl || project.appStoreUrl || project.playStoreUrl);
+  const hasLinks = Boolean(project.caseStudy || project.previewUrl || project.gitUrl || project.appStoreUrl || project.playStoreUrl);
 
   return (
     <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.35 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className={`${spanClass(index)} aspect-[4/3] sm:aspect-auto`}
     >
-      <TiltCard className="h-full">
-        <div className="group relative h-full min-h-[220px] rounded-2xl overflow-hidden border border-[#1E293B] hover:border-[#F59E0B]/40 transition-colors duration-300 bg-[#0A1628] shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+      <div className="group relative h-full min-h-[240px] rounded-xl overflow-hidden border border-[#F4EFE6]/[0.06] hover:border-[#D4AF6E]/40 transition-colors duration-700 bg-[#0A1628]">
 
-          {/* Media */}
-          {project.screens ? (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0A1628] to-[#16233C]">
-              <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle, #F59E0B 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
-              <div className="absolute inset-x-0 top-6 bottom-0 flex items-start justify-center gap-3 transition-transform duration-700 group-hover:scale-[1.06]">
-                {project.screens.map((src, i) => (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`${project.title} screenshot ${i + 1}`}
-                    loading="lazy"
-                    className={`h-[85%] w-auto rounded-xl border-2 border-[#1E293B] shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${i % 2 ? "rotate-3 translate-y-4" : "-rotate-3"}`}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : project.image ? (
-            <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.06]">
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${project.image})` }}
-              />
-              {project.hoverImage && (
-                <div
-                  className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                  style={{ backgroundImage: `url(${project.hoverImage})` }}
+        {/* Media */}
+        {project.screens ? (
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0A1628] to-[#16233C]">
+            <div className="absolute inset-x-0 top-8 bottom-0 flex items-start justify-center gap-3 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]">
+              {project.screens.map((src, i) => (
+                <img
+                  key={src}
+                  src={asset(src)}
+                  alt={`${project.title} screenshot ${i + 1}`}
+                  loading="lazy"
+                  className={`h-[85%] w-auto rounded-xl border border-[#F4EFE6]/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${i % 2 ? "rotate-2 translate-y-4" : "-rotate-2"}`}
                 />
-              )}
+              ))}
             </div>
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0A1628] to-[#16233C] transition-transform duration-700 group-hover:scale-[1.06]">
-              <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle, #F59E0B 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                {project.icon && (
-                  <project.icon className={`text-[#F59E0B]/15 ${big ? "w-32 h-32" : "w-16 h-16"}`} strokeWidth={1} />
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Base gradient for legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060B14] via-[#060B14]/50 to-transparent" />
-
-          {/* Category tag */}
-          <span className="absolute top-4 left-4 text-[10px] px-2 py-1 rounded-full bg-[#060B14]/70 border border-[#1E293B] backdrop-blur-sm text-[#94A3B8] tracking-widest uppercase">
-            {project.tag.find((t) => t !== "All")}
-          </span>
-
-          {/* Hover action overlay */}
-          {hasLinks && (
-            <div className="absolute inset-0 bg-[#060B14]/70 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-3">
-              {project.previewUrl && (
-                <Link href={project.previewUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#F59E0B] text-[#060B14] text-xs font-bold hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all duration-200">
-                  <EyeIcon className="w-3.5 h-3.5" /> Preview
-                </Link>
-              )}
-              {project.gitUrl && (
-                <Link href={project.gitUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold hover:bg-white hover:text-[#060B14] transition-all duration-200">
-                  <CodeBracketIcon className="w-3.5 h-3.5" /> Code
-                </Link>
-              )}
-              {project.appStoreUrl && (
-                <Link href={project.appStoreUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#F59E0B] text-[#060B14] text-xs font-bold hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all duration-200">
-                  <ArrowDownTrayIcon className="w-3.5 h-3.5" /> App Store
-                </Link>
-              )}
-              {project.playStoreUrl && (
-                <Link href={project.playStoreUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold hover:bg-white hover:text-[#060B14] transition-all duration-200">
-                  <ArrowDownTrayIcon className="w-3.5 h-3.5" /> Google Play
-                </Link>
-              )}
-            </div>
-          )}
-
-          {/* Title + description */}
-          <div className="absolute bottom-0 left-0 right-0 p-5">
-            <h3 className={`font-display text-white font-bold mb-1 group-hover:text-[#F59E0B] transition-colors duration-200 ${big ? "text-2xl" : "text-base"}`}>
-              {project.title}
-            </h3>
-            <p className={`text-[#94A3B8] leading-snug ${big ? "text-sm line-clamp-2 max-w-md" : "text-xs line-clamp-1"}`}>
-              {project.description}
-            </p>
           </div>
+        ) : (
+          <div className="absolute inset-0 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]">
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${asset(project.image)})` }} />
+            {project.hoverImage && (
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+                style={{ backgroundImage: `url(${asset(project.hoverImage)})` }}
+              />
+            )}
+          </div>
+        )}
+
+        {/* Base gradient for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060B14] via-[#060B14]/45 to-transparent" />
+
+        {/* Category tag */}
+        <span className="absolute top-4 left-4 text-[10px] px-2.5 py-1 rounded-full bg-[#060B14]/70 border border-[#F4EFE6]/10 backdrop-blur-sm text-[#D4AF6E] tracking-[0.25em] uppercase">
+          {project.tag.find((t) => t !== "All")}
+        </span>
+
+        {/* Hover action overlay */}
+        {hasLinks && (
+          <div className="absolute inset-0 bg-[#060B14]/75 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-wrap items-center justify-center content-center gap-2.5 p-6">
+            {project.caseStudy && (
+              <Link href={`/projects/${project.caseStudy}`} className={solidBtn}>
+                Case study <ArrowRightIcon className="w-3.5 h-3.5" />
+              </Link>
+            )}
+            {project.previewUrl && (
+              <Link href={project.previewUrl} target="_blank" rel="noopener noreferrer"
+                className={project.caseStudy ? ghostBtn : solidBtn}>
+                <EyeIcon className="w-3.5 h-3.5" /> Preview
+              </Link>
+            )}
+            {project.gitUrl && (
+              <Link href={project.gitUrl} target="_blank" rel="noopener noreferrer" className={ghostBtn}>
+                <CodeBracketIcon className="w-3.5 h-3.5" /> Code
+              </Link>
+            )}
+            {project.appStoreUrl && (
+              <Link href={project.appStoreUrl} target="_blank" rel="noopener noreferrer" className={ghostBtn}>
+                <ArrowDownTrayIcon className="w-3.5 h-3.5" /> App Store
+              </Link>
+            )}
+            {project.playStoreUrl && (
+              <Link href={project.playStoreUrl} target="_blank" rel="noopener noreferrer" className={ghostBtn}>
+                <ArrowDownTrayIcon className="w-3.5 h-3.5" /> Google Play
+              </Link>
+            )}
+          </div>
+        )}
+
+        {/* Title + description */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 pointer-events-none">
+          <h3 className={`font-display text-[#F4EFE6] font-medium mb-1 group-hover:text-[#D4AF6E] transition-colors duration-500 ${big ? "text-3xl" : "text-xl"}`}>
+            {project.title}
+          </h3>
+          <p className={`text-[#94A3B8] leading-snug ${big ? "text-sm line-clamp-2 max-w-md" : "text-xs line-clamp-1"}`}>
+            {project.description}
+          </p>
+          {/* Touch screens have no hover overlay, so surface the case study link directly */}
+          {project.caseStudy && (
+            <Link href={`/projects/${project.caseStudy}`}
+              className="pointer-events-auto relative z-10 mt-2 inline-flex items-center gap-1 text-[#D4AF6E] text-xs tracking-[0.2em] uppercase [@media(hover:hover)]:hidden">
+              Case study <ArrowRightIcon className="w-3 h-3" />
+            </Link>
+          )}
         </div>
-      </TiltCard>
+      </div>
     </motion.div>
   );
 };
@@ -239,16 +127,14 @@ const BentoCard = ({ project, index }) => {
 const FilterPill = ({ name, isSelected, count, onClick }) => (
   <button
     onClick={() => onClick(name)}
-    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+    className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${
       isSelected
-        ? "bg-[#F59E0B] text-[#060B14] shadow-[0_0_20px_rgba(245,158,11,0.3)]"
-        : "bg-[#0A1628] text-[#475569] border border-[#1E293B] hover:text-[#94A3B8]"
+        ? "bg-[#D4AF6E] text-[#060B14]"
+        : "border border-[#F4EFE6]/10 text-[#64748B] hover:text-[#F4EFE6]"
     }`}
   >
     {name}
-    <span className={`text-xs px-1.5 rounded-full ${isSelected ? "bg-[#060B14]/20" : "bg-[#060B14] text-[#334155]"}`}>
-      {count}
-    </span>
+    <span className={`text-[10px] ${isSelected ? "text-[#060B14]/60" : "text-[#334155]"}`}>{count}</span>
   </button>
 );
 
@@ -268,16 +154,11 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="relative bg-[#060B14] py-16 md:py-24 overflow-hidden">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-[#F59E0B] opacity-[0.03] blur-[160px] pointer-events-none" />
-
+    <section id="projects" className="relative bg-[#060B14] py-24 md:py-36 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
 
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-          <div className="flex items-center gap-3 flex-1">
-            <span className="w-6 h-1 rounded-full bg-[#F59E0B] flex-shrink-0" />
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white">My Projects</h2>
-          </div>
+        <div className="mb-14 flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-6">
+          <SectionHeading eyebrow="Selected Work" title={<>Projects, crafted <em className="text-[#D4AF6E]">with care</em></>} className="flex-1" />
           <div className="flex gap-2 flex-wrap">
             {["All", "Web", "Mobile"].map((tag) => (
               <FilterPill key={tag} name={tag} isSelected={activeTag === tag} count={counts[tag]} onClick={setActiveTag} />
@@ -285,19 +166,13 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:auto-rows-[220px]">
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-4 gap-5 sm:auto-rows-[240px]">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => (
               <BentoCard key={project.id} project={project} index={i} />
             ))}
           </AnimatePresence>
         </motion.div>
-
-        {filtered.length === 0 && (
-          <div className="text-center py-20 text-[#334155]">
-            <p className="font-medium">No projects match this filter.</p>
-          </div>
-        )}
       </div>
     </section>
   );

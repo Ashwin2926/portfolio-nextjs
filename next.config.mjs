@@ -10,4 +10,7 @@ const nextConfig = {
     },
 };
 
+// Expose the base path to client code so /public assets resolve from nested routes.
+nextConfig.env = { NEXT_PUBLIC_BASE_PATH: nextConfig.basePath };
+
 export default nextConfig;
