@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowDownTrayIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -35,36 +36,135 @@ const stats = [
   { value: `${projectsData.length}`, label: "Projects built" },
 ];
 
+/* Slowly rotating circular label with a monogram in the middle */
+const RotatingBadge = ({ className = "" }) => (
+  <div className={`rounded-full bg-accent text-canvas shadow-[0_18px_40px_-18px_rgba(31,77,58,0.8)] ${className}`}>
+    <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full motion-safe:animate-[spin_28s_linear_infinite]" aria-hidden="true">
+      <defs>
+        <path id="hero-badge-path" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" />
+      </defs>
+      <text fill="currentColor" fontSize="8.5" fontFamily="var(--font-sans)" style={{ textTransform: "uppercase" }}>
+        <textPath href="#hero-badge-path" textLength="224" lengthAdjust="spacing">
+          Software Engineer · Web &amp; Mobile ·
+        </textPath>
+      </text>
+    </svg>
+    <span className="absolute inset-0 flex items-center justify-center font-display italic text-xl lg:text-3xl">AN</span>
+  </div>
+);
+
+const Chip = ({ children, className = "" }) => (
+  <span className={`absolute hidden lg:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-paper border border-line text-ink text-xs shadow-[0_12px_30px_-15px_rgba(18,18,18,0.3)] ${className}`}>
+    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+    {children}
+  </span>
+);
+
 const HeroSection = () => {
   return (
-    <section className="relative bg-canvas pt-32 lg:pt-40 pb-16 lg:pb-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-12 items-end">
+    <section className="relative bg-canvas pt-28 lg:pt-40 pb-14 lg:pb-24 overflow-hidden">
 
-          {/* ── Text ── */}
-          <div className="lg:col-span-7 lg:pb-6">
-            <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2.5 mb-10 px-3.5 py-1.5 rounded-full border border-line bg-paper">
+      {/* ── Decorative layer ── */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+        {/* Architectural column lines */}
+        <div className="max-w-7xl h-full mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-4">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className={`h-full border-l border-line/60 ${i === 3 ? "border-r" : ""}`} />
+          ))}
+        </div>
+        {/* Large outline circles behind the portrait */}
+        <div className="absolute -right-28 top-56 w-[340px] h-[340px] lg:-right-24 lg:top-16 lg:w-[680px] lg:h-[680px] rounded-full border border-line" />
+        <div className="absolute -right-10 top-72 w-[220px] h-[220px] lg:right-12 lg:top-44 lg:w-[420px] lg:h-[420px] rounded-full border border-dashed border-accent/20" />
+        {/* Sparkles */}
+        <span className="absolute right-10 top-[17%] lg:right-auto lg:left-[46%] lg:top-[22%] text-accent/70 text-lg lg:text-2xl">✦</span>
+        <span className="absolute left-[8%] bottom-[30%] text-accent/40 text-sm hidden sm:block">✦</span>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="grid grid-cols-12 gap-x-5 sm:gap-x-8 lg:gap-x-12">
+
+          {/* Availability chip */}
+          <motion.div {...fadeUp(0)} className="col-span-12 lg:col-span-7 lg:row-start-1 mb-8 lg:mb-10">
+            <span className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-paper">
               <span className="relative flex w-2 h-2">
-                <span className="absolute inset-0 rounded-full bg-accent opacity-40 animate-ping" />
+                <span className="absolute inset-0 rounded-full bg-accent opacity-40 motion-safe:animate-ping" />
                 <span className="relative w-2 h-2 rounded-full bg-accent" />
               </span>
               <span className="text-body text-xs">Available for select projects</span>
-            </motion.div>
+            </span>
+          </motion.div>
 
-            <motion.h1 {...fadeUp(0.1)} className="font-display text-ink leading-[0.92] tracking-[-0.02em] mb-10">
-              <span className="block text-[17vw] sm:text-8xl xl:text-[8.5rem]">Ashwin</span>
-              <span className="block text-[17vw] sm:text-8xl xl:text-[8.5rem] italic text-accent">Nyamainashe</span>
-            </motion.h1>
+          {/* Name */}
+          <motion.h1 {...fadeUp(0.1)} className="col-span-12 lg:col-span-7 lg:row-start-2 font-display text-ink leading-[0.92] tracking-[-0.02em] mb-5 lg:mb-6">
+            <span className="block text-[16.5vw] sm:text-8xl xl:text-[8.5rem]">Ashwin</span>
+            <span className="block text-[16.5vw] sm:text-8xl xl:text-[8.5rem] italic text-accent">Nyamainashe</span>
+          </motion.h1>
 
-            <motion.p {...fadeUp(0.25)} className="text-body text-lg lg:text-xl leading-relaxed max-w-lg mb-10">
-              Software engineer crafting premium web platforms and mobile apps,
-              from first sketch to launch.
-            </motion.p>
+          {/* Typed role line; full width so it never wraps mid-animation */}
+          <motion.p {...fadeUp(0.2)} className="col-span-12 lg:col-span-7 lg:row-start-3 font-display text-3xl sm:text-4xl lg:text-5xl leading-[1.2] text-ink mb-8 lg:mb-8 whitespace-nowrap">
+            <span className="text-muted">— </span>
+            <TypeAnimation
+              sequence={[
+                "Software Engineer", 2200,
+                "Full-Stack Developer", 2200,
+                "Flutter Specialist", 2200,
+                "UI Craftsman", 2200,
+              ]}
+              wrapper="span"
+              speed={45}
+              repeat={Infinity}
+              className="italic"
+            />
+          </motion.p>
 
-            <motion.div {...fadeUp(0.35)} className="flex flex-wrap items-center gap-x-8 gap-y-5">
+          {/* Intro: beside the portrait on phones, under the name on desktop */}
+          <motion.div {...fadeUp(0.25)} className="col-span-7 lg:col-span-7 lg:row-start-4 self-center lg:self-start">
+            <p className="text-ink text-base sm:text-lg lg:text-xl leading-relaxed max-w-md">
+              Crafting premium web platforms and mobile apps from first sketch to launch.
+            </p>
+            <p className="text-muted text-sm mt-3">For brands across the UAE &amp; Africa.</p>
+          </motion.div>
+
+          {/* Portrait */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, delay: 0.2, ease }}
+            className="col-span-5 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-5 self-center lg:self-end flex justify-end"
+          >
+            <div className="relative w-full max-w-[380px] mt-2 lg:mt-0">
+              {/* Offset arch outline */}
+              <div className="absolute inset-0 translate-x-2 translate-y-2 lg:translate-x-5 lg:translate-y-5 rounded-t-full rounded-b-xl lg:rounded-b-2xl border border-accent/40" />
+              <div className="relative aspect-[4/5] rounded-t-full rounded-b-xl lg:rounded-b-2xl overflow-hidden bg-sand">
+                <Image
+                  src={asset("/images/profile.png")}
+                  alt="Ashwin Nyamainashe, Software Engineer"
+                  fill
+                  className="object-cover object-[50%_20%]"
+                  sizes="(max-width: 1024px) 40vw, 380px"
+                  priority
+                />
+              </div>
+
+              <RotatingBadge className="absolute -left-5 -top-3 w-16 h-16 lg:-left-12 lg:top-6 lg:w-32 lg:h-32" />
+
+              <Chip className="-right-6 top-[38%]">React · Next.js</Chip>
+              <Chip className="-right-10 top-[54%]">Flutter</Chip>
+              <Chip className="-left-14 bottom-[34%]">Laravel</Chip>
+
+              <div className="absolute -left-8 bottom-8 hidden lg:block bg-paper border border-line rounded-2xl px-5 py-4 shadow-[0_20px_50px_-20px_rgba(18,18,18,0.25)]">
+                <p className="font-display text-2xl text-ink leading-none">Full-stack</p>
+                <p className="text-muted text-xs mt-1.5">Web · Mobile · Product</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Actions: two buttons side by side on every screen */}
+          <motion.div {...fadeUp(0.35)} className="col-span-12 lg:col-span-7 lg:row-start-5 mt-8 lg:mt-10 flex flex-wrap items-center gap-3 sm:gap-x-8 sm:gap-y-5">
+            <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:w-auto sm:gap-6 sm:items-center">
               <Link
                 href="/#contact"
-                className="group inline-flex items-center gap-3 px-7 py-4 rounded-full text-sm font-medium text-canvas bg-ink hover:bg-accent transition-colors duration-300"
+                className="group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-7 py-3.5 sm:py-4 rounded-full text-sm font-medium text-canvas bg-ink hover:bg-accent transition-colors duration-300"
               >
                 Start a project
                 <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -72,52 +172,27 @@ const HeroSection = () => {
               <a
                 href={asset(CV_PATH)}
                 download
-                className="group inline-flex items-center gap-2 text-sm font-medium text-ink border-b border-ink/30 hover:border-ink pb-1 transition-colors duration-300"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:px-0 sm:py-1 rounded-full sm:rounded-none text-sm font-medium text-ink border border-line sm:border-0 sm:border-b sm:border-ink/30 hover:border-ink transition-colors duration-300"
               >
                 Download CV
                 <ArrowDownTrayIcon className="w-4 h-4" />
               </a>
-              <div className="flex items-center gap-4 text-muted">
-                <a href="https://github.com/Ashwin2926" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                  className="hover:text-ink transition-colors duration-300">
-                  <GitHubMark className="w-5 h-5" />
-                </a>
-                <a href="https://www.linkedin.com/in/ashwin-nyamainashe/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-                  className="hover:text-ink transition-colors duration-300">
-                  <LinkedInMark className="w-5 h-5" />
-                </a>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* ── Portrait in an arch ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, delay: 0.2, ease }}
-            className="lg:col-span-5 flex justify-center lg:justify-end"
-          >
-            <div className="relative w-full max-w-[380px]">
-              <div className="relative aspect-[4/5] rounded-t-full rounded-b-2xl overflow-hidden bg-sand">
-                <Image
-                  src={asset("/images/profile.png")}
-                  alt="Ashwin Nyamainashe, Software Engineer"
-                  fill
-                  className="object-cover object-[50%_20%]"
-                  sizes="(max-width: 1024px) 380px, 380px"
-                  priority
-                />
-              </div>
-              <div className="absolute -left-4 sm:-left-8 bottom-10 bg-paper border border-line rounded-2xl px-5 py-4 shadow-[0_20px_50px_-20px_rgba(18,18,18,0.25)]">
-                <p className="font-display text-2xl text-ink leading-none">Full-stack</p>
-                <p className="text-muted text-xs mt-1.5">Web · Mobile · Product</p>
-              </div>
+            </div>
+            <div className="flex items-center gap-4 text-muted">
+              <a href="https://github.com/Ashwin2926" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                className="hover:text-ink transition-colors duration-300">
+                <GitHubMark className="w-5 h-5" />
+              </a>
+              <a href="https://www.linkedin.com/in/ashwin-nyamainashe/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+                className="hover:text-ink transition-colors duration-300">
+                <LinkedInMark className="w-5 h-5" />
+              </a>
             </div>
           </motion.div>
         </div>
 
         {/* ── Stats ── */}
-        <motion.div {...fadeUp(0.5)} className="grid grid-cols-3 mt-20 lg:mt-24 border-t border-line">
+        <motion.div {...fadeUp(0.5)} className="relative grid grid-cols-3 mt-14 lg:mt-24 border-t border-line bg-canvas/60 backdrop-blur-[1px]">
           {stats.map(({ value, label }, i) => (
             <div key={label} className={`pt-6 ${i > 0 ? "pl-4 sm:pl-8 border-l border-line" : ""}`}>
               <p className="font-display text-4xl sm:text-5xl text-ink leading-none">{value}</p>

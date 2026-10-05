@@ -67,3 +67,11 @@ body {
   html { scroll-behavior: auto; }
   .animate-marquee { animation: none; }
 }
+
+/* ── Horizontal swipe rows (mobile) ── */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

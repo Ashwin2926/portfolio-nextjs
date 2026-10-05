@@ -87,7 +87,7 @@ export default async function CaseStudyPage({ params }) {
           </div>
 
           <Reveal delay={0.15} className="lg:col-span-4 lg:col-start-9">
-            <div className="lg:sticky lg:top-28 space-y-10 border-t border-line pt-10 lg:border-t-0 lg:pt-0 lg:border-l lg:pl-10">
+            <div className="lg:sticky lg:top-28 grid grid-cols-2 gap-x-6 gap-y-10 lg:block lg:space-y-10 border-t border-line pt-10 lg:border-t-0 lg:pt-0 lg:border-l lg:pl-10">
               <div>
                 <p className="text-muted text-[10px] tracking-[0.3em] uppercase mb-4">Scope</p>
                 <ul className="space-y-3">
@@ -100,7 +100,7 @@ export default async function CaseStudyPage({ params }) {
                 </ul>
               </div>
               {study.stack && (
-                <div>
+                <div className="col-span-2 order-last lg:order-none">
                   <p className="text-muted text-[10px] tracking-[0.3em] uppercase mb-4">Stack</p>
                   <div className="flex flex-wrap gap-2">
                     {study.stack.map((tech) => (
@@ -132,9 +132,9 @@ export default async function CaseStudyPage({ params }) {
       <section className="pb-24 md:pb-36">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <Reveal><Eyebrow>Highlights</Eyebrow></Reveal>
-          <div className="grid sm:grid-cols-2 gap-px bg-line border border-line rounded-xl overflow-hidden">
+          <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-6 sm:scroll-px-10 -mx-6 sm:-mx-10 px-6 sm:px-10 md:mx-0 md:px-0 md:overflow-visible md:grid md:grid-cols-2 md:gap-px md:bg-line md:border md:border-line md:rounded-xl md:overflow-hidden">
             {study.highlights.map(({ title, text }, i) => (
-              <Reveal key={title} delay={i * 0.1} className="bg-canvas p-8 sm:p-10">
+              <Reveal key={title} delay={i * 0.1} className="w-[80%] sm:w-[55%] flex-shrink-0 snap-start md:w-auto bg-paper md:bg-canvas border border-line md:border-0 rounded-2xl md:rounded-none p-7 sm:p-10">
                 <p className="font-display text-accent/60 text-lg mb-3">0{i + 1}</p>
                 <h3 className="font-display text-3xl text-ink mb-3">{title}</h3>
                 <p className="text-body font-light leading-relaxed">{text}</p>

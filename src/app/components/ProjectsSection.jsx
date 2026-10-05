@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
@@ -55,7 +55,7 @@ const ProjectCard = ({ project }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex flex-col"
+      className="group flex flex-col w-[82%] sm:w-[60%] flex-shrink-0 snap-start md:w-auto"
     >
       {primaryHref ? (
         <Link href={primaryHref} {...(primaryExternal ? ext : {})} aria-label={project.title}>
@@ -73,7 +73,7 @@ const ProjectCard = ({ project }) => {
         <p className="text-body text-sm leading-relaxed line-clamp-2 mb-4">{project.description}</p>
 
         {(project.caseStudy || links.length > 0) && (
-          <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+          <div className="md:mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
             {project.caseStudy && (
               <Link href={`/projects/${project.caseStudy}`}
                 className="inline-flex items-center gap-1.5 font-medium text-accent hover:text-accent-dark">
@@ -110,6 +110,22 @@ const FilterPill = ({ name, isSelected, count, onClick }) => (
 /* ─── Main section ───────────────────────────────────────────── */
 const ProjectsSection = () => {
   const [activeTag, setActiveTag] = useState("All");
+  const [position, setPosition] = useState(1);
+  const rowRef = useRef(null);
+
+  // On phones the cards form a swipe row; restart it when the filter changes.
+  useEffect(() => {
+    rowRef.current?.scrollTo({ left: 0 });
+    setPosition(1);
+  }, [activeTag]);
+
+  const handleScroll = () => {
+    const row = rowRef.current;
+    const card = row?.firstElementChild;
+    if (!card) return;
+    const step = card.getBoundingClientRect().width + 20;
+    setPosition(Math.min(Math.round(row.scrollLeft / step) + 1, row.childElementCount));
+  };
 
   const filtered = useMemo(
     () => projectsData.filter((p) => p.tag.includes(activeTag)),
@@ -126,7 +142,7 @@ const ProjectsSection = () => {
     <section id="projects" className="relative bg-paper border-y border-line py-24 md:py-36">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
 
-        <div className="mb-16 flex flex-col lg:flex-row lg:items-end gap-8">
+        <div className="mb-12 md:mb-16 flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-8">
           <SectionHeading eyebrow="Selected work" title={<>Projects, crafted <em className="text-accent">with care</em></>} className="flex-1" />
           <div className="flex gap-2 flex-wrap">
             {["All", "Web", "Mobile"].map((tag) => (
@@ -135,13 +151,29 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        <div
+          ref={rowRef}
+          onScroll={handleScroll}
+          className="no-scrollbar flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-px-6 sm:scroll-px-10 -mx-6 sm:-mx-10 px-6 sm:px-10 pb-2 md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-y-16"
+        >
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
+
+        {/* Swipe progress, phones only */}
+        <div className="md:hidden mt-8 flex items-center gap-4">
+          <span className="font-display text-2xl text-ink tabular-nums">{String(position).padStart(2, "0")}</span>
+          <div className="relative flex-1 h-px bg-line">
+            <span
+              className="absolute left-0 top-0 h-px bg-ink transition-all duration-300"
+              style={{ width: `${(position / filtered.length) * 100}%` }}
+            />
+          </div>
+          <span className="text-muted text-sm tabular-nums">{String(filtered.length).padStart(2, "0")}</span>
+        </div>
       </div>
     </section>
   );

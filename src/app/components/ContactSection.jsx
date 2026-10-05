@@ -19,13 +19,13 @@ const WhatsAppMark = ({ className }) => (
 );
 
 const channels = [
-  { label: "Email", value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, Icon: EnvelopeIcon },
+  { label: "Email", value: CONTACT_EMAIL, short: "Send an email", href: `mailto:${CONTACT_EMAIL}`, Icon: EnvelopeIcon },
   WHATSAPP_NUMBER && {
-    label: "WhatsApp", value: `+${WHATSAPP_NUMBER}`,
+    label: "WhatsApp", value: `+${WHATSAPP_NUMBER}`, short: "Chat now",
     href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Ashwin, I'd like to discuss a project.")}`,
     Icon: WhatsAppMark,
   },
-  { label: "LinkedIn", value: "ashwin-nyamainashe", href: "https://www.linkedin.com/in/ashwin-nyamainashe/", Icon: LinkedInMark },
+  { label: "LinkedIn", value: "ashwin-nyamainashe", short: "View profile", href: "https://www.linkedin.com/in/ashwin-nyamainashe/", Icon: LinkedInMark },
 ].filter(Boolean);
 
 const external = (href) => (href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {});
@@ -49,28 +49,32 @@ const ContactSection = () => {
               Open to select web and mobile projects, full-time roles and thoughtful
               collaborations. Tell me about yours.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:gap-4">
               <a href={bookingHref} {...external(bookingHref)}
-                className="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full text-sm font-medium text-ink bg-canvas hover:bg-accent-light transition-colors duration-300">
+                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-7 py-4 rounded-full text-sm font-medium text-ink bg-canvas hover:bg-accent-light transition-colors duration-300">
                 <CalendarDaysIcon className="w-4 h-4" /> Book a call
               </a>
               <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("New project enquiry")}`}
-                className="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full text-sm font-medium text-canvas border border-canvas/25 hover:border-canvas transition-colors duration-300">
+                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-7 py-4 rounded-full text-sm font-medium text-canvas border border-canvas/25 hover:border-canvas transition-colors duration-300">
                 <EnvelopeIcon className="w-4 h-4" /> Send a brief
               </a>
             </div>
           </Reveal>
 
           <Reveal delay={0.15} className="relative mt-20 pt-10 border-t border-canvas/15">
-            <div className={`grid gap-8 ${channels.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
-              {channels.map(({ label, value, href, Icon }) => (
+            <div className={`grid grid-cols-2 gap-x-6 gap-y-8 ${channels.length === 3 ? "sm:grid-cols-3" : ""}`}>
+              {channels.map(({ label, value, short, href, Icon }) => (
                 <a key={label} href={href} {...external(href)} className="group flex items-start gap-4">
-                  <Icon className="w-5 h-5 mt-0.5 text-accent-light flex-shrink-0" />
+                  <Icon className="hidden sm:block w-5 h-5 mt-0.5 text-accent-light flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="text-canvas/50 text-xs mb-1">{label}</p>
-                    <p className="text-canvas text-base truncate border-b border-transparent group-hover:border-canvas/60 transition-colors duration-300 inline-flex items-center gap-1.5">
-                      {value}
-                      <ArrowUpRightIcon className="w-3.5 h-3.5 text-canvas/40 group-hover:text-canvas transition-colors duration-300" />
+                    <p className="flex items-start gap-1.5 text-canvas text-sm sm:text-base">
+                      <span className="border-b border-transparent group-hover:border-canvas/60 transition-colors duration-300">
+                        {/* Phones show a short call to action; the full address doesn't fit a half-width column */}
+                        <span className="sm:hidden">{short}</span>
+                        <span className="hidden sm:inline">{value}</span>
+                      </span>
+                      <ArrowUpRightIcon className="w-3.5 h-3.5 mt-1 flex-shrink-0 text-canvas/40 group-hover:text-canvas transition-colors duration-300" />
                     </p>
                   </div>
                 </a>
