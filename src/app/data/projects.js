@@ -12,6 +12,26 @@ export const projectsData = [
     image: "/images/projects/tessera.png", tag: ["All", "Web"], previewUrl: "https://www.tesserakoreanbeauty.co.ke/", caseStudy: "tessera",
   },
   {
+    id: 19, title: "Forex Trading Assistant", description: "AI-driven trading signal platform combining technical analysis with machine learning and reinforcement learning models, with a FastAPI backend and Next.js dashboard.",
+    tag: ["All", "AI & Automation"],
+    visual: { label: "Machine Learning", stack: ["FastAPI", "Machine Learning", "Reinforcement Learning", "Next.js"] },
+  },
+  {
+    id: 20, title: "WhatsApp Automation Chatbots", description: "Multilingual WhatsApp chatbots in English, Arabic and Urdu, built on the Meta WhatsApp Cloud API for Tareeqk to automate customer conversations and cut response times.",
+    tag: ["All", "AI & Automation"], caseStudy: "tareeqk",
+    visual: { label: "Automation", stack: ["Meta WhatsApp Cloud API", "English · Arabic · Urdu", "Customer support"] },
+  },
+  {
+    id: 21, title: "Excel AI Assistant", description: "LLM-powered tool that answers plain-English questions about spreadsheets, automating filtering, extraction and clean-up of business data.",
+    tag: ["All", "AI & Automation"],
+    visual: { label: "LLM", stack: ["Python", "Large Language Models", "pandas"] },
+  },
+  {
+    id: 22, title: "Notification Service", description: "Event-driven notification microservice that automates email, SMS and push delivery through an asynchronous message queue, built with FastAPI.",
+    tag: ["All", "AI & Automation"],
+    visual: { label: "Automation", stack: ["FastAPI", "Message queues", "Async workers"] },
+  },
+  {
     id: 8, title: "Prevail Shipping", description: "Full shipping & logistics company website with service listings, tracking info and contact flows.",
     image: "/images/projects/prevailshipping.png", tag: ["All", "Web"], previewUrl: "https://prevailshipping.com",
   },
@@ -106,11 +126,14 @@ export const caseStudies = [
       "Customer app for iOS and Android",
       "Driver app for iOS and Android",
       "Dispatch and job management",
+      "Multilingual WhatsApp automation chatbots",
     ],
+    stack: ["React Native", "Laravel", "Next.js", "Meta WhatsApp Cloud API"],
     highlights: [
       { title: "Request in seconds", text: "Route preview on a live map, vehicle type with upfront pricing, and UAE plate entry with emirate selection." },
       { title: "Flexible payments", text: "Cash, wallet or card at checkout, with promo codes built into the request flow." },
       { title: "Built for drivers", text: "Provider wallet with top-up and withdraw, service and fleet categories from 3-ton to desert recovery, and refer-and-earn." },
+      { title: "WhatsApp automation", text: "Chatbots in English, Arabic and Urdu on the Meta WhatsApp Cloud API answer customers instantly and cut response times." },
       { title: "Live on both stores", text: "Customer and driver apps are published on the App Store and Google Play." },
     ],
     gallery: [
@@ -143,10 +166,11 @@ export const caseStudies = [
     scope: [
       "Next.js storefront with cart, wishlist and reviews",
       "Care Circle loyalty program",
-      "FastAPI back office: M-Pesa payments, invoicing, stock and commissions",
+      "FastAPI back office: M-Pesa and card payments, invoicing, stock and commissions",
+      "Point of sale and automated SMS/email notifications",
       "Consultation, journal and product verification pages",
     ],
-    stack: ["Next.js", "FastAPI", "M-Pesa"],
+    stack: ["Next.js", "FastAPI", "MongoDB", "M-Pesa"],
     highlights: [
       { title: "Boutique storefront", text: "Editorial typography, curated brand marquee and a quiet, premium layout that lets the products lead." },
       { title: "Trust built in", text: "Dedicated verify page and authenticity messaging throughout the shopping journey." },

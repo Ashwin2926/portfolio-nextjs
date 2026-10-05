@@ -9,10 +9,37 @@ import SectionHeading from "./SectionHeading";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 
+/* ─── Generated visual for projects without screenshots ─────── */
+const VisualPanel = ({ project }) => (
+  <div className="absolute inset-0 bg-ink text-canvas overflow-hidden">
+    <div aria-hidden="true" className="absolute inset-0 opacity-[0.07]"
+      style={{ backgroundImage: "linear-gradient(#F6F3EE 1px, transparent 1px), linear-gradient(90deg, #F6F3EE 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+    <div aria-hidden="true" className="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-accent opacity-60 blur-[70px] transition-transform duration-700 group-hover:scale-110" />
+    <div aria-hidden="true" className="absolute right-6 top-6 w-24 h-24 rounded-full border border-canvas/15" />
+    <div aria-hidden="true" className="absolute right-12 top-12 w-12 h-12 rounded-full border border-accent-light/40" />
+    <div className="relative h-full flex flex-col justify-between p-5 sm:p-6">
+      <span className="inline-flex items-center gap-2 text-accent-light text-[11px] font-medium tracking-[0.25em] uppercase">
+        <span className="w-1.5 h-1.5 rounded-full bg-accent-light" />
+        {project.tag.find((t) => t !== "All")}
+      </span>
+      <div>
+        <p className="font-display italic text-4xl lg:text-5xl leading-none mb-4">{project.visual.label}</p>
+        <ul className="flex flex-wrap gap-1.5">
+          {project.visual.stack.map((item) => (
+            <li key={item} className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-canvas/15 bg-canvas/5 text-canvas/80 text-[10px] sm:text-[11px]">{item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+);
+
 /* ─── Card media ─────────────────────────────────────────────── */
 const Media = ({ project }) => (
   <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-sand border border-line">
-    {project.screens ? (
+    {project.visual ? (
+      <VisualPanel project={project} />
+    ) : project.screens ? (
       <div className="absolute inset-0 flex items-start justify-center gap-4 pt-8 transition-transform duration-700 ease-out group-hover:scale-[1.03]">
         {project.screens.map((src, i) => (
           <img
@@ -98,7 +125,7 @@ const FilterPill = ({ name, isSelected, count, onClick }) => (
   <button
     onClick={() => onClick(name)}
     aria-pressed={isSelected}
-    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors duration-300 ${
+    className={`flex flex-shrink-0 items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors duration-300 ${
       isSelected ? "bg-ink text-canvas" : "border border-line text-body hover:border-ink hover:text-ink"
     }`}
   >
@@ -136,6 +163,7 @@ const ProjectsSection = () => {
     All: projectsData.length,
     Web: projectsData.filter((p) => p.tag.includes("Web")).length,
     Mobile: projectsData.filter((p) => p.tag.includes("Mobile")).length,
+    "AI & Automation": projectsData.filter((p) => p.tag.includes("AI & Automation")).length,
   };
 
   return (
@@ -144,8 +172,8 @@ const ProjectsSection = () => {
 
         <div className="mb-12 md:mb-16 flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-8">
           <SectionHeading eyebrow="Selected work" title={<>Projects, crafted <em className="text-accent">with care</em></>} className="flex-1" />
-          <div className="flex gap-2 flex-wrap">
-            {["All", "Web", "Mobile"].map((tag) => (
+          <div className="no-scrollbar flex gap-2 overflow-x-auto -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap">
+            {["All", "Web", "Mobile", "AI & Automation"].map((tag) => (
               <FilterPill key={tag} name={tag} isSelected={activeTag === tag} count={counts[tag]} onClick={setActiveTag} />
             ))}
           </div>
