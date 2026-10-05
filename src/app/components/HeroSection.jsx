@@ -96,8 +96,8 @@ const HeroSection = () => {
 
           {/* Name */}
           <motion.h1 {...fadeUp(0.1)} className="col-span-12 lg:col-span-7 lg:row-start-2 font-display text-ink leading-[0.92] tracking-[-0.02em] mb-5 lg:mb-6">
-            <span className="block text-[16.5vw] sm:text-8xl xl:text-[8.5rem]">Ashwin</span>
-            <span className="block text-[16.5vw] sm:text-8xl xl:text-[8.5rem] italic text-accent">Nyamainashe</span>
+            <span className="block text-[12.5vw] sm:text-7xl xl:text-[6.25rem]">Ashwin</span>
+            <span className="block text-[12.5vw] sm:text-7xl xl:text-[6.25rem] italic text-accent">Nyamainashe</span>
           </motion.h1>
 
           {/* Typed role line; full width so it never wraps mid-animation */}
