@@ -14,10 +14,10 @@ const NavLink = ({ href, title }) => (
   <Link
     href={href}
     onClick={(e) => scrollToHash(e, href)}
-    className="relative group py-2 px-1 text-xs tracking-[0.2em] uppercase text-[#94A3B8] hover:text-[#F4EFE6] transition-colors duration-500"
+    className="relative group py-2 text-[13px] text-body hover:text-ink transition-colors duration-300"
   >
     {title}
-    <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4AF6E] group-hover:w-full transition-all duration-500 ease-out" />
+    <span className="absolute bottom-0.5 left-0 w-0 h-px bg-ink group-hover:w-full transition-all duration-500 ease-out" />
   </Link>
 );
 

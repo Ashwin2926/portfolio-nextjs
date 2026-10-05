@@ -1,12 +1,9 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import NavLink from "./NavLink";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import logo from "../../assets/logo.png";
+import NavLink, { scrollToHash } from "./NavLink";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import MenuOverlay from "./MenuOverlay";
-import { scrollToHash } from "./NavLink";
 
 const navLinks = [
   { title: "About",    path: "/#about" },
@@ -20,6 +17,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -32,50 +30,31 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
-          isScrolled
-            ? "bg-[#060B14]/85 backdrop-blur-xl border-b border-[#F4EFE6]/[0.06]"
-            : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          isScrolled || navbarOpen ? "bg-canvas/90 backdrop-blur-md border-b border-line" : "bg-transparent border-b border-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 h-[72px] flex items-center justify-between">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group focus:outline-none">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-lg bg-[#D4AF6E]/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <Image
-                src={logo}
-                alt="Ashwin logo"
-                width={40}
-                height={40}
-                className="object-contain relative z-10"
-                priority
-              />
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-display text-[#F4EFE6] text-xl font-medium">
-                Ashwin<span className="text-[#D4AF6E]">.</span>
-              </span>
-              <span className="text-[#64748B] text-[10px] tracking-[0.25em] uppercase">Portfolio</span>
-            </div>
+          {/* Wordmark */}
+          <Link href="/" className="font-display text-2xl text-ink leading-none">
+            Ashwin <span className="italic text-accent">N.</span>
           </Link>
 
           {/* Desktop nav */}
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <NavLink href={link.path} title={link.title} />
               </li>
             ))}
-            {/* CTA button */}
             <li>
               <Link
                 href="/#contact"
                 onClick={(e) => scrollToHash(e, "/#contact")}
-                className="px-6 py-2.5 rounded-full text-xs font-semibold tracking-[0.2em] uppercase text-[#060B14] bg-[#D4AF6E] hover:bg-[#F4EFE6] transition-colors duration-500"
+                className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium text-canvas bg-ink hover:bg-accent transition-colors duration-300"
               >
-                Let&apos;s Talk
+                Let&apos;s talk
               </Link>
             </li>
           </ul>
@@ -84,17 +63,13 @@ const Navbar = () => {
           <button
             onClick={() => setNavbarOpen((o) => !o)}
             aria-label={navbarOpen ? "Close menu" : "Open menu"}
-            className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl border border-[#1E293B] bg-[#0A1628] text-[#64748B] hover:text-[#D4AF6E] hover:border-[#D4AF6E]/30 transition-all duration-200 z-50"
+            className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-line text-ink hover:border-ink transition-colors duration-300"
           >
-            {navbarOpen
-              ? <XMarkIcon className="w-5 h-5" />
-              : <Bars3Icon className="w-5 h-5" />
-            }
+            {navbarOpen ? <XMarkIcon className="w-5 h-5" /> : <Bars3Icon className="w-5 h-5" />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile overlay */}
       {navbarOpen && (
         <MenuOverlay links={navLinks} closeMenu={() => setNavbarOpen(false)} />
       )}

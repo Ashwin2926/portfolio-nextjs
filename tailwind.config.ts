@@ -8,14 +8,25 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Ink & Ivory palette
+      colors: {
+        canvas: "#F6F3EE",   // page background, warm ivory
+        paper: "#FBF9F5",    // raised surfaces
+        sand: "#EDE8DF",     // tinted panels
+        line: "#E2DCD2",     // hairlines and borders
+        ink: "#121212",      // headings and primary text
+        body: "#4A4640",     // paragraph text
+        muted: "#6F6A62",    // labels and secondary text
+        accent: {
+          DEFAULT: "#1F4D3A", // deep emerald
+          dark: "#163828",
+          soft: "#E3EBE5",
+          light: "#A9C9B6", // accent for use on ink backgrounds
+        },
+      },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "var(--font-sans)", "system-ui", "sans-serif"],
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        display: ["var(--font-display)", "Georgia", "serif"],
       },
     },
   },

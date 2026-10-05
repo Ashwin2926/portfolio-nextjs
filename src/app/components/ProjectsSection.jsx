@@ -2,124 +2,94 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import {
-  CodeBracketIcon, EyeIcon, ArrowDownTrayIcon, ArrowRightIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { projectsData } from "../data/projects";
 import { asset } from "../../lib/asset";
 import SectionHeading from "./SectionHeading";
 
-/* ─── Bento tile ──────────────────────────────────────────────── */
-const spanClass = (i) => {
-  const m = i % 7;
-  if (m === 0) return "sm:col-span-2 sm:row-span-2";
-  if (m === 4) return "sm:col-span-2 sm:row-span-1";
-  return "sm:col-span-1 sm:row-span-1";
-};
+const ext = { target: "_blank", rel: "noopener noreferrer" };
 
-const solidBtn = "flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#D4AF6E] text-[#060B14] text-xs font-semibold tracking-wide hover:bg-[#F4EFE6] transition-colors duration-300";
-const ghostBtn = "flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#F4EFE6]/30 text-[#F4EFE6] text-xs font-medium tracking-wide hover:bg-[#F4EFE6] hover:text-[#060B14] transition-colors duration-300";
+/* ─── Card media ─────────────────────────────────────────────── */
+const Media = ({ project }) => (
+  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-sand border border-line">
+    {project.screens ? (
+      <div className="absolute inset-0 flex items-start justify-center gap-4 pt-8 transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+        {project.screens.map((src, i) => (
+          <img
+            key={src}
+            src={asset(src)}
+            alt={`${project.title} screenshot ${i + 1}`}
+            loading="lazy"
+            className={`h-[88%] w-auto rounded-xl shadow-[0_20px_40px_-15px_rgba(18,18,18,0.35)] ${i % 2 ? "translate-y-6" : ""}`}
+          />
+        ))}
+      </div>
+    ) : (
+      <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+        <img src={asset(project.image)} alt={project.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
+        {project.hoverImage && (
+          <img src={asset(project.hoverImage)} alt="" aria-hidden="true" loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover object-top opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        )}
+      </div>
+    )}
+  </div>
+);
 
-const BentoCard = ({ project, index }) => {
-  const big = index % 7 === 0;
-  const hasLinks = Boolean(project.caseStudy || project.previewUrl || project.gitUrl || project.appStoreUrl || project.playStoreUrl);
+/* ─── Card ───────────────────────────────────────────────────── */
+const ProjectCard = ({ project }) => {
+  const primaryHref = project.caseStudy ? `/projects/${project.caseStudy}` : project.previewUrl || project.gitUrl;
+  const primaryExternal = !project.caseStudy && Boolean(primaryHref);
+
+  const links = [
+    project.previewUrl && { label: "Visit site", href: project.previewUrl },
+    project.appStoreUrl && { label: "App Store", href: project.appStoreUrl },
+    project.playStoreUrl && { label: "Google Play", href: project.playStoreUrl },
+    project.gitUrl && { label: "Code", href: project.gitUrl },
+  ].filter(Boolean);
 
   return (
-    <motion.div
+    <motion.article
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`${spanClass(index)} aspect-[4/3] sm:aspect-auto`}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="group flex flex-col"
     >
-      <div className="group relative h-full min-h-[240px] rounded-xl overflow-hidden border border-[#F4EFE6]/[0.06] hover:border-[#D4AF6E]/40 transition-colors duration-700 bg-[#0A1628]">
+      {primaryHref ? (
+        <Link href={primaryHref} {...(primaryExternal ? ext : {})} aria-label={project.title}>
+          <Media project={project} />
+        </Link>
+      ) : (
+        <Media project={project} />
+      )}
 
-        {/* Media */}
-        {project.screens ? (
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0A1628] to-[#16233C]">
-            <div className="absolute inset-x-0 top-8 bottom-0 flex items-start justify-center gap-3 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]">
-              {project.screens.map((src, i) => (
-                <img
-                  key={src}
-                  src={asset(src)}
-                  alt={`${project.title} screenshot ${i + 1}`}
-                  loading="lazy"
-                  className={`h-[85%] w-auto rounded-xl border border-[#F4EFE6]/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${i % 2 ? "rotate-2 translate-y-4" : "-rotate-2"}`}
-                />
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="absolute inset-0 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]">
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${asset(project.image)})` }} />
-            {project.hoverImage && (
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
-                style={{ backgroundImage: `url(${asset(project.hoverImage)})` }}
-              />
-            )}
-          </div>
-        )}
+      <div className="pt-5 flex flex-col flex-1">
+        <div className="flex items-baseline justify-between gap-4 mb-2">
+          <h3 className="font-display text-[1.75rem] leading-tight text-ink">{project.title}</h3>
+          <span className="text-muted text-xs flex-shrink-0">{project.tag.find((t) => t !== "All")}</span>
+        </div>
+        <p className="text-body text-sm leading-relaxed line-clamp-2 mb-4">{project.description}</p>
 
-        {/* Base gradient for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060B14] via-[#060B14]/45 to-transparent" />
-
-        {/* Category tag */}
-        <span className="absolute top-4 left-4 text-[10px] px-2.5 py-1 rounded-full bg-[#060B14]/70 border border-[#F4EFE6]/10 backdrop-blur-sm text-[#D4AF6E] tracking-[0.25em] uppercase">
-          {project.tag.find((t) => t !== "All")}
-        </span>
-
-        {/* Hover action overlay */}
-        {hasLinks && (
-          <div className="absolute inset-0 bg-[#060B14]/75 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-wrap items-center justify-center content-center gap-2.5 p-6">
+        {(project.caseStudy || links.length > 0) && (
+          <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
             {project.caseStudy && (
-              <Link href={`/projects/${project.caseStudy}`} className={solidBtn}>
+              <Link href={`/projects/${project.caseStudy}`}
+                className="inline-flex items-center gap-1.5 font-medium text-accent hover:text-accent-dark">
                 Case study <ArrowRightIcon className="w-3.5 h-3.5" />
               </Link>
             )}
-            {project.previewUrl && (
-              <Link href={project.previewUrl} target="_blank" rel="noopener noreferrer"
-                className={project.caseStudy ? ghostBtn : solidBtn}>
-                <EyeIcon className="w-3.5 h-3.5" /> Preview
-              </Link>
-            )}
-            {project.gitUrl && (
-              <Link href={project.gitUrl} target="_blank" rel="noopener noreferrer" className={ghostBtn}>
-                <CodeBracketIcon className="w-3.5 h-3.5" /> Code
-              </Link>
-            )}
-            {project.appStoreUrl && (
-              <Link href={project.appStoreUrl} target="_blank" rel="noopener noreferrer" className={ghostBtn}>
-                <ArrowDownTrayIcon className="w-3.5 h-3.5" /> App Store
-              </Link>
-            )}
-            {project.playStoreUrl && (
-              <Link href={project.playStoreUrl} target="_blank" rel="noopener noreferrer" className={ghostBtn}>
-                <ArrowDownTrayIcon className="w-3.5 h-3.5" /> Google Play
-              </Link>
-            )}
+            {links.map(({ label, href }) => (
+              <a key={label} href={href} {...ext}
+                className="inline-flex items-center gap-1 text-body hover:text-ink transition-colors duration-300">
+                {label} <ArrowUpRightIcon className="w-3 h-3" />
+              </a>
+            ))}
           </div>
         )}
-
-        {/* Title + description */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 pointer-events-none">
-          <h3 className={`font-display text-[#F4EFE6] font-medium mb-1 group-hover:text-[#D4AF6E] transition-colors duration-500 ${big ? "text-3xl" : "text-xl"}`}>
-            {project.title}
-          </h3>
-          <p className={`text-[#94A3B8] leading-snug ${big ? "text-sm line-clamp-2 max-w-md" : "text-xs line-clamp-1"}`}>
-            {project.description}
-          </p>
-          {/* Touch screens have no hover overlay, so surface the case study link directly */}
-          {project.caseStudy && (
-            <Link href={`/projects/${project.caseStudy}`}
-              className="pointer-events-auto relative z-10 mt-2 inline-flex items-center gap-1 text-[#D4AF6E] text-xs tracking-[0.2em] uppercase [@media(hover:hover)]:hidden">
-              Case study <ArrowRightIcon className="w-3 h-3" />
-            </Link>
-          )}
-        </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 
@@ -127,14 +97,13 @@ const BentoCard = ({ project, index }) => {
 const FilterPill = ({ name, isSelected, count, onClick }) => (
   <button
     onClick={() => onClick(name)}
-    className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${
-      isSelected
-        ? "bg-[#D4AF6E] text-[#060B14]"
-        : "border border-[#F4EFE6]/10 text-[#64748B] hover:text-[#F4EFE6]"
+    aria-pressed={isSelected}
+    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors duration-300 ${
+      isSelected ? "bg-ink text-canvas" : "border border-line text-body hover:border-ink hover:text-ink"
     }`}
   >
     {name}
-    <span className={`text-[10px] ${isSelected ? "text-[#060B14]/60" : "text-[#334155]"}`}>{count}</span>
+    <span className={`text-xs ${isSelected ? "text-canvas/60" : "text-muted"}`}>{count}</span>
   </button>
 );
 
@@ -154,11 +123,11 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="relative bg-[#060B14] py-24 md:py-36 overflow-hidden">
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+    <section id="projects" className="relative bg-paper border-y border-line py-24 md:py-36">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
 
-        <div className="mb-14 flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-6">
-          <SectionHeading eyebrow="Selected Work" title={<>Projects, crafted <em className="text-[#D4AF6E]">with care</em></>} className="flex-1" />
+        <div className="mb-16 flex flex-col lg:flex-row lg:items-end gap-8">
+          <SectionHeading eyebrow="Selected work" title={<>Projects, crafted <em className="text-accent">with care</em></>} className="flex-1" />
           <div className="flex gap-2 flex-wrap">
             {["All", "Web", "Mobile"].map((tag) => (
               <FilterPill key={tag} name={tag} isSelected={activeTag === tag} count={counts[tag]} onClick={setActiveTag} />
@@ -166,10 +135,10 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-4 gap-5 sm:auto-rows-[240px]">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <BentoCard key={project.id} project={project} index={i} />
+            {filtered.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </AnimatePresence>
         </motion.div>

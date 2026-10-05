@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Geist } from "next/font/google";
+import { Instrument_Serif, Inter } from "next/font/google";
 import { asset } from "../lib/asset";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
   style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
 });
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
@@ -45,8 +44,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${geist.variable}`}>
-      <body className={geist.className}>{children}</body>
+    <html lang="en" className={`${instrumentSerif.variable} ${inter.variable}`}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

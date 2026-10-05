@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#060B14]">
+    <main className="flex min-h-screen flex-col bg-canvas">
       <Navbar />
       {/* Full-bleed sections; no container wrapper so each section controls its own max-width */}
       <HeroSection />
