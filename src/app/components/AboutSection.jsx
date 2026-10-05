@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { asset } from "../../lib/asset";
@@ -29,16 +28,28 @@ const AboutSection = () => {
 
         <div className="grid grid-cols-12 gap-x-5 sm:gap-x-8 lg:gap-x-16">
 
-          {/* Portrait: beside the opening line on phones, its own column on desktop */}
+          {/* Work collage: beside the opening line on phones, its own column on desktop.
+              Sizes are percentages so the composition holds at any width. */}
           <Reveal className="col-span-5 lg:row-start-1 lg:row-span-2">
-            <div className="relative aspect-[4/5] max-w-[440px] rounded-xl lg:rounded-2xl overflow-hidden bg-sand">
-              <Image
-                src={asset("/images/hero.jpg")}
-                alt="Ashwin Nyamainashe, Software Engineer"
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 1024px) 40vw, 440px"
-              />
+            <div className="relative aspect-[4/5] max-w-[440px] rounded-xl lg:rounded-2xl overflow-hidden bg-sand border border-line">
+              <div aria-hidden="true" className="absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2 w-[120%] aspect-square rounded-full border border-dashed border-accent/25" />
+
+              {/* Web projects, stacked like cards */}
+              <img src={asset("/images/projects/design-studio.png")} alt="My Design Studio website" loading="lazy"
+                className="absolute left-[14%] top-[5%] w-[80%] rounded-md lg:rounded-lg border border-line shadow-[0_18px_40px_-18px_rgba(18,18,18,0.45)] rotate-[3deg]" />
+              <img src={asset("/images/projects/tessera.png")} alt="Tessera Korean Beauty website" loading="lazy"
+                className="absolute left-[6%] top-[13%] w-[80%] rounded-md lg:rounded-lg border border-line shadow-[0_18px_40px_-18px_rgba(18,18,18,0.45)] -rotate-[2deg]" />
+
+              {/* Mobile apps */}
+              <img src={asset("/images/projects/tareeqk-customer.jpeg")} alt="Tareeqk customer app" loading="lazy"
+                className="absolute left-[14%] bottom-[4%] w-[29%] rounded-lg lg:rounded-2xl border-2 lg:border-4 border-ink shadow-[0_20px_40px_-15px_rgba(18,18,18,0.5)]" />
+              <img src={asset("/images/projects/tareeqk-driver.jpeg")} alt="Tareeqk driver app" loading="lazy"
+                className="absolute right-[14%] bottom-[8%] w-[29%] rounded-lg lg:rounded-2xl border-2 lg:border-4 border-ink shadow-[0_20px_40px_-15px_rgba(18,18,18,0.5)]" />
+
+              <span className="hidden sm:inline-flex absolute left-1/2 -translate-x-1/2 bottom-3 lg:bottom-4 items-center gap-2 px-3 py-1 rounded-full bg-paper/90 border border-line text-ink text-[11px] whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                Selected work
+              </span>
             </div>
           </Reveal>
 
