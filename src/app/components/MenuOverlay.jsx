@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { scrollToHash } from "./NavLink";
+import { whatsappHref } from "./icons";
 
 const MenuOverlay = ({ links, closeMenu }) => {
   return (
@@ -32,6 +33,10 @@ const MenuOverlay = ({ links, closeMenu }) => {
         <a href="https://www.linkedin.com/in/ashwin-nyamainashe/" target="_blank" rel="noopener noreferrer"
           className="text-body hover:text-ink transition-colors duration-300">
           LinkedIn
+        </a>
+        <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
+          className="text-body hover:text-ink transition-colors duration-300">
+          WhatsApp
         </a>
       </div>
     </div>
