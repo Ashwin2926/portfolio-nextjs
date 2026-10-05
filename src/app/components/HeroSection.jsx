@@ -108,6 +108,7 @@ const HeroSection = () => {
                 "Software Engineer", 2200,
                 "Full-Stack Developer", 2200,
                 "Flutter Specialist", 2200,
+                "AI & Automation Builder", 2200,
                 "UI Craftsman", 2200,
               ]}
               wrapper="span"
@@ -151,6 +152,7 @@ const HeroSection = () => {
               <Chip className="-right-6 top-[38%]">React · Next.js</Chip>
               <Chip className="-right-10 top-[54%]">Flutter</Chip>
               <Chip className="-left-14 bottom-[34%]">Laravel</Chip>
+              <Chip className="-right-4 top-[22%]">FastAPI · AI</Chip>
 
               <div className="absolute -left-8 bottom-8 hidden lg:block bg-paper border border-line rounded-2xl px-5 py-4 shadow-[0_20px_50px_-20px_rgba(18,18,18,0.25)]">
                 <p className="font-display text-2xl text-ink leading-none">Full-stack</p>

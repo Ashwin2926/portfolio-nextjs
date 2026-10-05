@@ -134,7 +134,7 @@ export default async function CaseStudyPage({ params }) {
           <Reveal><Eyebrow>Highlights</Eyebrow></Reveal>
           <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-6 sm:scroll-px-10 -mx-6 sm:-mx-10 px-6 sm:px-10 md:mx-0 md:px-0 md:overflow-visible md:grid md:grid-cols-2 md:gap-px md:bg-line md:border md:border-line md:rounded-xl md:overflow-hidden">
             {study.highlights.map(({ title, text }, i) => (
-              <Reveal key={title} delay={i * 0.1} className="w-[80%] sm:w-[55%] flex-shrink-0 snap-start md:w-auto bg-paper md:bg-canvas border border-line md:border-0 rounded-2xl md:rounded-none p-7 sm:p-10">
+              <Reveal key={title} delay={i * 0.1} className="w-[80%] sm:w-[55%] flex-shrink-0 snap-start md:w-auto md:[&:last-child:nth-child(odd)]:col-span-2 bg-paper md:bg-canvas border border-line md:border-0 rounded-2xl md:rounded-none p-7 sm:p-10">
                 <p className="font-display text-accent/60 text-lg mb-3">0{i + 1}</p>
                 <h3 className="font-display text-3xl text-ink mb-3">{title}</h3>
                 <p className="text-body font-light leading-relaxed">{text}</p>

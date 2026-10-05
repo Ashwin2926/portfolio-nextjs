@@ -4,7 +4,11 @@ import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { asset } from "../../lib/asset";
 
-const skills = ["Laravel", "React", "Next.js", "Flutter", "MySQL", "Python", "Java", "C#", "Node.js", "JavaScript", "HTML5 / CSS3", "Power BI"];
+const skills = [
+  "React", "Next.js", "Flutter", "React Native", "Laravel", "FastAPI", "Python", "Node.js",
+  "MySQL", "MongoDB", "AI / LLM integration", "Machine Learning", "WhatsApp Cloud API",
+  "Workflow automation", "C#", "Power BI",
+];
 const certifications = [
   "OPSWAT Data Transfer Security Associate (ODSA)",
   "OPSWAT File Security Associate (OFSA)",
@@ -48,9 +52,10 @@ const AboutSection = () => {
           <Reveal delay={0.2} className="col-span-12 lg:col-span-7 lg:col-start-6 lg:row-start-2 mt-10 lg:mt-8">
             <p className="text-body text-base lg:text-lg leading-relaxed mb-12 lg:mb-14 max-w-2xl">
               I&apos;m a full-stack developer crafting interactive, responsive applications across web
-              and mobile. My work spans Flutter, React, Laravel, Power BI, C# and MySQL, and a
-              background in graphic design shapes how I approach every interface: functional first,
-              and never without polish.
+              and mobile, with FastAPI and Laravel back ends. I also build AI-powered tools and
+              automations, from LLM assistants to WhatsApp chatbots, that take repetitive work off
+              teams&apos; plates. A background in graphic design shapes every interface: functional
+              first, and never without polish.
             </p>
 
             <div className="grid grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-10">
