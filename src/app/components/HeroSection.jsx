@@ -61,9 +61,6 @@ const HeroSection = () => {
             <div key={i} className={`h-full border-l border-line/60 ${i === 3 ? "border-r" : ""}`} />
           ))}
         </div>
-        {/* Large outline circles behind the portrait */}
-        <div className="absolute -right-28 top-56 w-[340px] h-[340px] lg:-right-24 lg:top-16 lg:w-[680px] lg:h-[680px] rounded-full border border-line" />
-        <div className="absolute -right-10 top-72 w-[220px] h-[220px] lg:right-12 lg:top-44 lg:w-[420px] lg:h-[420px] rounded-full border border-dashed border-accent/20" />
         {/* Sparkles */}
         <span className="absolute right-10 top-[17%] lg:right-auto lg:left-[46%] lg:top-[22%] text-accent/70 text-lg lg:text-2xl">✦</span>
         <span className="absolute left-[8%] bottom-[30%] text-accent/40 text-sm hidden sm:block">✦</span>
@@ -122,18 +119,25 @@ const HeroSection = () => {
             transition={{ duration: 1.4, delay: 0.2, ease }}
             className="col-span-5 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-5 self-center lg:self-end flex justify-end"
           >
-            <div className="relative w-full max-w-[380px] mt-2 lg:mt-0">
-              {/* Offset arch outline */}
-              <div className="absolute inset-0 translate-x-2 translate-y-2 lg:translate-x-5 lg:translate-y-5 rounded-t-full rounded-b-xl lg:rounded-b-2xl border border-accent/40" />
-              <div className="relative aspect-[4/5] rounded-t-full rounded-b-xl lg:rounded-b-2xl overflow-hidden bg-sand">
-                <Image
-                  src={asset("/images/profile.png")}
-                  alt="Ashwin Nyamainashe, Software Engineer"
-                  fill
-                  className="object-cover object-[50%_20%]"
-                  sizes="(max-width: 1024px) 40vw, 380px"
-                  priority
-                />
+            <div className="relative w-full max-w-[380px] mt-2 lg:mt-0 [container-type:inline-size]">
+              {/* Circles centred on the portrait */}
+              <div aria-hidden="true" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] aspect-square rounded-full border border-line pointer-events-none" />
+              <div aria-hidden="true" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[128%] aspect-square rounded-full border border-dashed border-accent/25 pointer-events-none" />
+
+              {/* Arch frame: radii come from the container width (a "full" radius would make the
+                  browser scale every corner down and square off the bottom), and the photo's radii
+                  are smaller by the padding, so frame and photo stay concentric */}
+              <div className="relative rounded-t-[50cqw] rounded-b-[22px] lg:rounded-b-[32px] border border-accent/35 bg-paper p-2 lg:p-3 shadow-[0_30px_60px_-30px_rgba(18,18,18,0.35)]">
+                <div className="relative aspect-[4/5] rounded-t-[calc(50cqw-0.5rem)] lg:rounded-t-[calc(50cqw-0.75rem)] rounded-b-[14px] lg:rounded-b-[20px] overflow-hidden bg-sand">
+                  <Image
+                    src={asset("/images/profile.png")}
+                    alt="Ashwin Nyamainashe, Software Engineer"
+                    fill
+                    className="object-cover object-[50%_20%]"
+                    sizes="(max-width: 1024px) 40vw, 380px"
+                    priority
+                  />
+                </div>
               </div>
 
               <RotatingBadge className="absolute -left-5 -top-3 w-16 h-16 lg:-left-12 lg:top-6 lg:w-32 lg:h-32" />
